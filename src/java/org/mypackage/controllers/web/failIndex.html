@@ -1,0 +1,70 @@
+ <!DOCTYPE html>
+
+ <html>  
+      
+   <head>  
+       <style>
+.animate {
+    -webkit-animation: animate_bg 20s;
+    animation: animate_bg 20s;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    color: white;
+    text-align: center;
+}
+
+@keyframes animate_bg {
+    0%   {background:red;}
+    25%  {background:yellow;}
+    50% {background:green;}
+    75%  {background:yellow;}
+    100%   {background:red;}
+}
+
+@-webkit-keyframes animate_bg {
+     0%   {background:red;}
+    25%  {background:yellow;}
+    50% {background:green;}
+    75%  {background:yellow;}
+    100%   {background:red;}
+}
+</style>
+  
+ <title>Welcome Page | ConfusOMeter | Welcome Page</title>  
+     <meta charset="UTF-8">  
+     <meta name="viewport" content="width=device-width">  
+   </head>  
+   <body class="animate">   
+   <center> ConfusOMeter</center>
+   <br>
+   
+       <!--   
+       Create an input form to take in the user's name and date of birth  
+       and send them to the servlet  
+       -->  
+       <div align="center">
+       <form name="Student Form" action="StudentServlet">  
+     
+         <!--  
+         Provide a label for the user to read and input fields,  
+         passing on the name and date of birth  
+         -->  
+         Enter Room # 
+         <br>
+         <input type="text"   
+                      name="id"   
+                      value="" />   
+         <!--  
+         Provide a button as a means of submitting the user's data  
+         -->  
+         <input type="submit" value="Submit" name="Submit Button"/>  
+      </form>
+       <form name="Teacher Form" action="TeacherServlet">  
+         <input type="submit" value="Create a Room" name="Submit Button"/>  
+      </form>
+       Room does not exist!
+       </div>
+       
+
+   </body>  
+ </html> 
