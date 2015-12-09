@@ -5,6 +5,7 @@
 package org.mypackage.controllers;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -53,10 +54,22 @@ public class LoginServlet extends HttpServlet {
         }
         ses.setAttribute("username", username);
         if (!UserDatabaseHandler.isTeacher(username)) {
-            dispatcher = getServletContext().getRequestDispatcher("/userpanel.jsp");
-            dispatcher.forward(request, response);
+            //student
+            response.setContentType("text/html");
+            PrintWriter out = response.getWriter();
+            
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Hellow World</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Hellow World</h1>");
+            out.println("</body>");
+            out.println("</html>");
+            
             return;
         } else {
+            //teacher
             dispatcher = getServletContext().getRequestDispatcher("/teacherPanel.jsp");
             dispatcher.forward(request, response);
             return;
