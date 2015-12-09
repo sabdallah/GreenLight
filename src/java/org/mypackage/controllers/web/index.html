@@ -25,6 +25,22 @@
         <![endif]-->
 
         <style>
+            html {
+                position: relative;
+                min-height: 100%;
+            }
+            body {
+                /* Margin bottom by footer height */
+                margin-bottom: 50px;
+            }
+            .footer {
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                /* Set the fixed height of the footer here */
+                height: 50px;
+                background-color: #2C3E50;
+            }
             .animate {
                 position: relative; 
                 top: -30px;
@@ -87,14 +103,14 @@
                 <a href="register.html" class="btn btn-block btn-lg btn-info">Register</a>  
                 </br>
                 </br>
-                
+
 
             </div>
         </div>
         <div style="width: 100%; background-color: #34495E; height: 400px;">
             </br>
             </br>
-            <div class="col-lg-12" >
+            <div class="col-lg-12" style="background-color: #34495E;" >
                 <div class="row">
                     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                         <div class="tile">
@@ -122,11 +138,15 @@
             </div>
 
         </div>
-        <div style="width: 100%; background-color: #2C3E50; height: 50px;">
-            
-            <span  style="color: white;"><p><small><i>Created by Sam Abdallah and Lucas Sacherer</i></small></p></span> 
-        </div>
+        <footer class="footer">
+            <div class="col-lg-12" style="background-color: #2C3E50;" >
+                <div class="row">
+                    <span  style="color: white;"><p><small><i>Created by Sam Abdallah and Lucas Sacherer</i></small></p></span> 
+                </div>
+            </div>
+        </footer>
 
 
     </body>  
+
 </html>  
