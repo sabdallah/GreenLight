@@ -68,6 +68,8 @@ public class LoginServlet extends HttpServlet {
                         "<input type=\"submit\" value=\"Create New Class\" />\n" +
                         "</form>");
             out.println("<h1>Hellow World</h1>");
+            //creates the table of classes
+            createTable(out,request.getParameter("username"));
             out.println("</body>");
             out.println("</html>");
             
@@ -81,7 +83,29 @@ public class LoginServlet extends HttpServlet {
         }
     }
     
-    
+    /**
+     * Creates the table of classes on the page
+     * @param out 
+     */
+    private void createTable(PrintWriter out, String username)
+    {
+        out.println("<table border=\"5\">");
+        //labels
+        out.println("<tr>\n" +
+                    "<td>Class</td>\n" +
+                    "<td>Link</td>\n" +
+                    "</tr>");
+        
+        String classes = UserDatabaseHandler.getClasses(username);
+        if(classes == null)
+        {
+            out.println("<tr>\n" +
+                    "<td>No classes yet!</td>\n" +
+                    "<td>Click above to add your first class!</td>\n" +
+                    "</tr>");
+        }
+        out.println("</table>");
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
