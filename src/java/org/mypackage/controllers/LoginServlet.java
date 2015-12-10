@@ -63,6 +63,10 @@ public class LoginServlet extends HttpServlet {
             out.println("<title>Hellow World</title>");
             out.println("</head>");
             out.println("<body>");
+            //creates button to add class
+            out.println("<form action=\"NewClassServlet\">\n" +
+                        "<input type=\"submit\" value=\"Create New Class\" />\n" +
+                        "</form>");
             out.println("<h1>Hellow World</h1>");
             out.println("</body>");
             out.println("</html>");
@@ -76,6 +80,8 @@ public class LoginServlet extends HttpServlet {
 
         }
     }
+    
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
