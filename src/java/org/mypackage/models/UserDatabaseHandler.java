@@ -27,7 +27,7 @@ public class UserDatabaseHandler {
     /**
      * Gets a string list of classes that the student is in.
      */
-    static String getClasses(String email) {
+    public static String getClasses(String email) {
         Connection conn = null;
         Statement stmt = null;
         String result = "";
