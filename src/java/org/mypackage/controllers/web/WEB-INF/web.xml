@@ -36,6 +36,10 @@
         <servlet-name>NewClassServlet</servlet-name>
         <servlet-class>org.mypackage.controllers.NewClassServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreateClassServlet</servlet-name>
+        <servlet-class>org.mypackage.controllers.CreateClassServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>StudentServlet</servlet-name>
         <url-pattern>/StudentServlet</url-pattern>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>NewClassServlet</servlet-name>
         <url-pattern>/NewClassServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateClassServlet</servlet-name>
+        <url-pattern>/CreateClassServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

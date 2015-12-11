@@ -271,6 +271,8 @@ public class ClassDatabaseHandler {
         }
         System.out.println("Disconnecting!");
     }
+    
+    
     /**
      * Checks if a room exists in the database.
      */
