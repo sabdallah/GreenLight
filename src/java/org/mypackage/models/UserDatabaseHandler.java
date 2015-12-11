@@ -31,6 +31,7 @@ public class UserDatabaseHandler {
         Connection conn = null;
         Statement stmt = null;
         String result = "";
+        email = email.substring(0,email.indexOf("@")) + " " + email.substring(email.indexOf("@")+1);
         try {
 
             System.out.println("Connecting to database...");
@@ -79,6 +80,7 @@ public class UserDatabaseHandler {
         Connection conn = null;
         Statement stmt = null;
         boolean result = false;
+        email = email.substring(0,email.indexOf("@")) + " " + email.substring(email.indexOf("@")+1);
         try {
 
             System.out.println("Connecting to database...");
@@ -129,6 +131,7 @@ public class UserDatabaseHandler {
     public static void verify(String email) {
         Connection conn = null;
         Statement stmt = null;
+        email = email.substring(0,email.indexOf("@")) + " " + email.substring(email.indexOf("@")+1);
         try {
             System.out.println("Connecting to database... ");
             conn = ((DataSource) new InitialContext().lookup("jdbc/ConfusOMeter")).getConnection();
@@ -173,6 +176,7 @@ public class UserDatabaseHandler {
         if (isUser(username)) {
             return;
         }
+        username = username.substring(0,username.indexOf("@")) + " " + username.substring(username.indexOf("@")+1);
         try {
 
             System.out.println("Connecting to database...");
@@ -215,6 +219,7 @@ public class UserDatabaseHandler {
         Connection conn = null;
         Statement stmt = null;
         boolean result = false;
+        username = username.substring(0,username.indexOf("@")) + " " + username.substring(username.indexOf("@")+1);
         try {
 
             System.out.println("Connecting to database...");
@@ -274,6 +279,7 @@ public class UserDatabaseHandler {
         try {
             if(!isUser(username))
                 return false;
+            username = username.substring(0,username.indexOf("@")) + " " + username.substring(username.indexOf("@")+1);
             System.out.println("Connecting to database...");
             conn = ((DataSource) new InitialContext().lookup("jdbc/ConfusOMeter")).getConnection();
 
@@ -330,6 +336,7 @@ public class UserDatabaseHandler {
         Connection conn = null;
         Statement stmt = null;
         boolean result = false;
+        username = username.substring(0,username.indexOf("@")) + " " + username.substring(username.indexOf("@")+1);
         try {
             if(!isUser(username))
                 return false;

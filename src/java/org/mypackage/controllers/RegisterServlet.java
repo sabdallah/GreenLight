@@ -46,10 +46,10 @@ public class RegisterServlet extends HttpServlet {
         String pass1, pass2, user;
         InternetAddress i = null;
 
-        if (request.getParameter("password") != null && request.getParameter("password2") != null && request.getParameter("user") != null) {
+        if (request.getParameter("password") != null && request.getParameter("password2") != null && request.getParameter("username") != null) {
             pass1 = (String) request.getParameter("password");
             pass2 = (String) request.getParameter("password2");
-            user = (String) request.getParameter("user");
+            user = (String) request.getParameter("username");
             try {
                 i = new InternetAddress(user);
             } catch (AddressException ex) {
