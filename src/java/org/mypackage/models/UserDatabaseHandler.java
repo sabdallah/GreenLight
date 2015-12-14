@@ -40,7 +40,7 @@ public class UserDatabaseHandler {
             System.out.println("Creating statement... getClasses");
             stmt = conn.createStatement();
             String sql;
-            sql = "SELECT classes FROM Root.accounts WHERE email ='" + email + "'";
+            sql = "SELECT classes FROM Root.accounts WHERE CAST(email AS VARCHAR(128)) ='" + email + "'";
             ResultSet rs = stmt.executeQuery(sql);
 
             rs.next();
@@ -336,10 +336,11 @@ public class UserDatabaseHandler {
         Connection conn = null;
         Statement stmt = null;
         boolean result = false;
-        username = username.substring(0,username.indexOf("@")) + " " + username.substring(username.indexOf("@")+1);
+        
         try {
             if(!isUser(username))
                 return false;
+            username = username.substring(0,username.indexOf("@")) + " " + username.substring(username.indexOf("@")+1);
             System.out.println("Connecting to database...");
             conn = ((DataSource) new InitialContext().lookup("jdbc/ConfusOMeter")).getConnection();
 
