@@ -6,6 +6,7 @@ package org.mypackage.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Iterator;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -51,6 +52,9 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("error", new StringHolder("Password incorrect."));
             dispatcher.forward(request, response);
             return;
+        } else if(!UserDatabaseHandler.isVerified(username)){
+            request.setAttribute("error", new StringHolder("User not verified, check your email."));
+            dispatcher.forward(request, response);
         }
         ses.setAttribute("username", username);
         if (!UserDatabaseHandler.isTeacher(username)) {
@@ -60,14 +64,14 @@ public class LoginServlet extends HttpServlet {
             
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Hellow World</title>");
+            out.println("<title>Green Light</title>");
             out.println("</head>");
             out.println("<body>");
             //creates button to add class
             out.println("<form action=\"NewClassServlet\">\n" +
-                        "<input type=\"submit\" value=\"Create New Class\" />\n" +
+                        "<input type=\"submit\" value=\"Add Class\" />\n" +
                         "</form>");
-            out.println("<h1>Hellow World</h1>");
+            out.println("<h1>Welcome " + username + "</h1>");
             //creates the table of classes
             createTable(out,request.getParameter("username"));
             out.println("</body>");
@@ -76,8 +80,23 @@ public class LoginServlet extends HttpServlet {
             return;
         } else {
             //teacher
-            dispatcher = getServletContext().getRequestDispatcher("/teacherPanel.jsp");
-            dispatcher.forward(request, response);
+            response.setContentType("text/html");
+            PrintWriter out = response.getWriter();
+            
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Green Light</title>");
+            out.println("</head>");
+            out.println("<body>");
+            //creates button to add class
+            out.println("<form action=\"NewClassServlet\">\n" + //TO DO: sitch this to add class
+                        "<input type=\"submit\" value=\"Create New Class\" />\n" +
+                        "</form>");
+            out.println("<h1>Welcome " + username + "</h1>");
+            //creates the table of classes
+            createTable(out,request.getParameter("username"));
+            out.println("</body>");
+            out.println("</html>");
             return;
 
         }
@@ -103,6 +122,17 @@ public class LoginServlet extends HttpServlet {
                     "<td>No classes yet!</td>\n" +
                     "<td>Click above to add your first class!</td>\n" +
                     "</tr>");
+        }else{
+            String[] classArray = classes.split(",");
+            int index = 0;
+            while(index+1 < classArray.length)
+            {
+                out.print("<tr>\n" +
+                    "<td>"+ classArray[index]+"</td>\n" +
+                    "<td>"+ classArray[index+1]+"</td>\n" +
+                    "</tr>");
+                index += 2;
+            }
         }
         out.println("</table>");
     }

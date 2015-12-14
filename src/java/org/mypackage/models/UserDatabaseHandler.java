@@ -75,8 +75,50 @@ public class UserDatabaseHandler {
         System.out.println("Disconnecting!");
         return result;
     }
+    
+    public static void createRoom(String name, int id, String password){
+        Connection conn = null;
+        Statement stmt = null;
+        try {
 
-    static boolean isVerified(String email) {
+            System.out.println("Connecting to database...");
+            conn = ((DataSource) new InitialContext().lookup("jdbc/ConfusOMeter")).getConnection();
+
+            System.out.println("Creating statement... isVerified");
+            stmt = conn.createStatement();
+            
+            String sql;
+            sql = "INSERT INTO Root.data (room, understand, total, name, password) VALUES('" + id + "',0,0,'" + name + "','"+password+"')";
+            stmt.execute(sql);
+            
+            stmt.close();
+            conn.close();
+        } catch (SQLException se) {
+
+            se.printStackTrace();
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        } finally {
+
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException se2) {
+            }
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        System.out.println("Disconnecting!");
+    }
+
+    public static boolean isVerified(String email) {
         Connection conn = null;
         Statement stmt = null;
         boolean result = false;
