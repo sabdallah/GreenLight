@@ -21,6 +21,7 @@ public class UserDatabaseHandler {
 
     //Database URL
     static final String DB_URL = "jdbc:derby://localhost:1527/data";
+    private static Object ClassDatabseHandler;
 
     @SuppressWarnings("empty-statement")
 
@@ -76,8 +77,7 @@ public class UserDatabaseHandler {
         return result;
     }
     
-    public static void createRoom(String name, int id, String password, String email){
-        
+    public static void createRoom(int id, String email){
         email = email.substring(0,email.indexOf("@")) + " " + email.substring(email.indexOf("@")+1);
         Connection conn = null;
         Statement stmt = null;
