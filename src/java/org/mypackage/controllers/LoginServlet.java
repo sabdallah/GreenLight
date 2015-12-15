@@ -91,9 +91,7 @@ public class LoginServlet extends HttpServlet {
             //creates button to add class
             out.println("<br>\n" +
 "                <a href=\"NewClassPage.html\" class=\"btn btn-block btn-lg btn-info\">Create new class</a>  \n" +
-"                </br>\n" + //TO DO: sitch this to add class
-                        "<input type=\"submit\" value=\"Create New Class\" />\n" +
-                        "</form>");
+"                </br>\n");
             out.println("<h1>Welcome " + username + "</h1>");
             //creates the table of classes
             createTable(out,request.getParameter("username"));
