@@ -76,9 +76,12 @@ public class UserDatabaseHandler {
         return result;
     }
     
-    public static void createRoom(String name, int id, String password){
+    public static void createRoom(String name, int id, String password, String email){
+        
+        email = email.substring(0,email.indexOf("@")) + " " + email.substring(email.indexOf("@")+1);
         Connection conn = null;
         Statement stmt = null;
+        String result = null;
         try {
 
             System.out.println("Connecting to database...");
@@ -88,9 +91,18 @@ public class UserDatabaseHandler {
             stmt = conn.createStatement();
             
             String sql;
-            sql = "INSERT INTO Root.data (room, understand, total, name, password) VALUES('" + id + "',0,0,'" + name + "','"+password+"')";
+            
+            sql = "SELECT classes FROM Root.accounts WHERE email ='" + email + "'";
+            ResultSet rs = stmt.executeQuery(sql);
+
+            rs.next();
+
+            result = rs.getString("CLASSES");
+            
+            sql = "UPDATE Root.accounts SET classes = '" + result + "," + id +"' WHERE email ='" + email + "'";
             stmt.execute(sql);
             
+            rs.close();
             stmt.close();
             conn.close();
         } catch (SQLException se) {
