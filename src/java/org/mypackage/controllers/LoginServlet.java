@@ -52,10 +52,10 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("error", new StringHolder("Password incorrect."));
             dispatcher.forward(request, response);
             return;
-        } else if(!UserDatabaseHandler.isVerified(username)){
-            request.setAttribute("error", new StringHolder("User not verified, check your email."));
-            dispatcher.forward(request, response);
-        }
+        } //else if(!UserDatabaseHandler.isVerified(username)){
+            //request.setAttribute("error", new StringHolder("User not verified, check your email."));
+            //dispatcher.forward(request, response);
+        //}
         ses.setAttribute("username", username);
         if (!UserDatabaseHandler.isTeacher(username)) {
             //student
