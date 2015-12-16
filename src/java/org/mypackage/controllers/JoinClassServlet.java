@@ -7,10 +7,15 @@ package org.mypackage.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import org.mypackage.models.ClassDatabaseHandler;
+import org.mypackage.models.StringHolder;
+import org.mypackage.models.UserDatabaseHandler;
 
 /**
  *
@@ -30,17 +35,26 @@ public class JoinClassServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet JoinClassServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet JoinClassServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String id1 = "";
+        int id2 = 0;
+        String password = "";
+        HttpSession ses = request.getSession();
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/failLogin.jsp");
+        if (request.getParameter("classID") != null) {
+            id1 = (String) request.getParameter("classID");
+            id2 = Integer.parseInt(id1);
+        }
+        if (request.getParameter("password") != null) {
+            password = (String) request.getParameter("password");
+        }
+        if (!ClassDatabaseHandler.checkRoom(id2)) {
+            request.setAttribute("error", new StringHolder("There is no user with that email in our database."));
+            dispatcher.forward(request, response);
+            return;
+        } else if (!ClassDatabaseHandler.checkPassword(id2, password)) {
+            request.setAttribute("error", new StringHolder("Password incorrect."));
+            dispatcher.forward(request, response);
+            return;
         }
     }
 

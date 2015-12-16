@@ -6,6 +6,7 @@ package org.mypackage.models;
 import java.sql.*;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+import static org.mypackage.models.UserDatabaseHandler.isUser;
 
 /**
  *
@@ -295,6 +296,65 @@ public class ClassDatabaseHandler {
             try {
                 if (rs.getInt("room") != 0) {
                     result = true;
+                }
+            } catch (SQLException e) {
+                result = false;
+            }
+
+            rs.close();
+            stmt.close();
+            conn.close();
+        } catch (SQLException se) {
+
+            se.printStackTrace();
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        } finally {
+
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException se2) {
+            }
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        System.out.println("Disconnecting!");
+        return result;
+    }
+    
+    public static boolean checkPassword(int id, String password) {
+        Connection conn = null;
+        Statement stmt = null;
+        boolean result = false;
+        try {
+            if(!checkRoom(id))
+                return false;
+            System.out.println("Connecting to database...");
+            conn = ((DataSource) new InitialContext().lookup("jdbc/ConfusOMeter")).getConnection();
+
+            System.out.println("Creating statement... checkPassword");
+            stmt = conn.createStatement();
+            String sql;
+            sql = "SELECT * FROM Root.Data";
+            ResultSet rs = stmt.executeQuery(sql);
+
+            try {
+                while(!result && rs.next())
+                {
+                if (rs.getInt("room")==id) {
+                    if(rs.getString("password").equals(password))
+                        result = true;
+                    else
+                        break;
+                }
                 }
             } catch (SQLException e) {
                 result = false;
