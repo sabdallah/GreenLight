@@ -49,7 +49,7 @@ public class CreateClassServlet extends HttpServlet {
         String pass1, pass2, name;
         InternetAddress i = null;
 
-        if (request.getParameter("password") != null && request.getParameter("password2") != null && request.getParameter("name") != null) {
+        if (request.getParameter("password") != null && request.getParameter("password2") != null && request.getParameter("classname") != null) {
             pass1 = (String) request.getParameter("password");
             pass2 = (String) request.getParameter("password2");
             name = (String) request.getParameter("name");
