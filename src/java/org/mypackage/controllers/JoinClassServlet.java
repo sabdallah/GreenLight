@@ -56,6 +56,8 @@ public class JoinClassServlet extends HttpServlet {
             dispatcher.forward(request, response);
             return;
         }
+        
+        UserDatabaseHandler.addRoom(id2, (String) ses.getAttribute("username"));
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
