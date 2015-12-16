@@ -125,13 +125,13 @@ public class LoginServlet extends HttpServlet {
         }else{
             String[] classArray = classes.split(",");
             int index = 0;
-            while(index+1 < classArray.length)
+            while(index < classArray.length)
             {
                 out.print("<tr>\n" +
                     "<td>"+ classArray[index]+"</td>\n" +
-                    "<td>"+ classArray[index+1]+"</td>\n" +
+                    "<td>"+ classArray[index]+"</td>\n" +
                     "</tr>");
-                index += 2;
+                index++;
             }
         }
         out.println("</table>");

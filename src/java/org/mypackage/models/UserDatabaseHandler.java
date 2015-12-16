@@ -77,7 +77,7 @@ public class UserDatabaseHandler {
         return result;
     }
     
-    public static void createRoom(int id, String email){
+    public static void addRoom(int id, String email){
         email = email.substring(0,email.indexOf("@")) + " " + email.substring(email.indexOf("@")+1);
         Connection conn = null;
         Statement stmt = null;
@@ -92,14 +92,14 @@ public class UserDatabaseHandler {
             
             String sql;
             
-            sql = "SELECT classes FROM Root.accounts WHERE email ='" + email + "'";
+            sql = "SELECT classes FROM Root.accounts WHERE CAST(email AS VARCHAR(128)) ='" + email + "'";
             ResultSet rs = stmt.executeQuery(sql);
 
             rs.next();
 
             result = rs.getString("CLASSES");
             
-            sql = "UPDATE Root.accounts SET classes = '" + result + "," + id +"' WHERE email ='" + email + "'";
+            sql = "UPDATE Root.accounts SET classes = '" + result + "," + id +"' WHERE CAST(email AS VARCHAR(128)) ='" + email + "'";
             stmt.execute(sql);
             
             rs.close();

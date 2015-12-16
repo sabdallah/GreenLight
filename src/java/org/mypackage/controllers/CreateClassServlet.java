@@ -22,6 +22,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.mypackage.models.ClassDatabaseHandler;
 import org.mypackage.models.Encryption;
 import org.mypackage.models.StringHolder;
@@ -48,6 +49,8 @@ public class CreateClassServlet extends HttpServlet {
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/failRegister.jsp");
         String pass1, pass2, name;
         InternetAddress i = null;
+        HttpSession ses = request.getSession();
+        String username = (String)ses.getAttribute("username");
 
         if (request.getParameter("password") != null && request.getParameter("password2") != null && request.getParameter("classname") != null) {
             pass1 = (String) request.getParameter("password");
@@ -75,20 +78,20 @@ public class CreateClassServlet extends HttpServlet {
             dispatcher.forward(request, response);
             return;
         } 
-        addClass(name, pass1);
+        addClass(name, pass1, username);
         dispatcher = getServletContext().getRequestDispatcher("/sendConfirmation.jsp");
         dispatcher.forward(request, response);
 
     }
      
-     public void addClass(String name, String password){
+     public void addClass(String name, String password, String username){
         Random rand = new Random();
         int num = rand.nextInt(100000) + 1;
         while (ClassDatabaseHandler.checkRoom(num)) {
             num = rand.nextInt(100000) + 1;
         }
-         
          ClassDatabaseHandler.createRoom(num, name, password);
+         UserDatabaseHandler.addRoom(num, username);
      }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
