@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.mypackage.models.StringHolder;
 import org.mypackage.models.UserDatabaseHandler;
+import org.mypackage.models.panelCreator;
 
 /**
  *
@@ -36,6 +37,7 @@ public class LoginServlet extends HttpServlet {
         String username = "";
         String password = "";
         HttpSession ses = request.getSession();
+        response.setContentType("text/html");
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/failLogin.jsp");
         if (request.getParameter("username") != null) {
             username = (String) request.getParameter("username");
@@ -57,85 +59,10 @@ public class LoginServlet extends HttpServlet {
             //dispatcher.forward(request, response);
         //}
         ses.setAttribute("username", username);
-        if (!UserDatabaseHandler.isTeacher(username)) {
-            //student
-            response.setContentType("text/html");
-            PrintWriter out = response.getWriter();
-            
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Green Light</title>");
-            out.println("</head>");
-            out.println("<body>");
-            //creates button to add class
-            out.println("<form action=\"NewClassServlet\">\n" +
-                        "<input type=\"submit\" value=\"Add Class\" />\n" +
-                        "</form>");
-            out.println("<h1>Welcome " + username + "</h1>");
-            //creates the table of classes
-            createTable(out,request.getParameter("username"));
-            out.println("</body>");
-            out.println("</html>");
-            
-            return;
-        } else {
-            //teacher
-            response.setContentType("text/html");
-            PrintWriter out = response.getWriter();
-            
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Green Light</title>");
-            out.println("</head>");
-            out.println("<body>");
-            //creates button to add class
-            out.println("<br>\n" +
-"                <a href=\"NewClassPage.html\" class=\"btn btn-block btn-lg btn-info\">Create new class</a>  \n" +
-"                </br>\n");
-            out.println("<h1>Welcome " + username + "</h1>");
-            //creates the table of classes
-            createTable(out,request.getParameter("username"));
-            out.println("</body>");
-            out.println("</html>");
-            return;
-
-        }
+        PrintWriter out = response.getWriter();
+        new panelCreator(out, username, !UserDatabaseHandler.isTeacher(username));
     }
     
-    /**
-     * Creates the table of classes on the page
-     * @param out 
-     */
-    private void createTable(PrintWriter out, String username)
-    {
-        out.println("<table border=\"5\">");
-        //labels
-        out.println("<tr>\n" +
-                    "<td>Class</td>\n" +
-                    "<td>Link</td>\n" +
-                    "</tr>");
-        
-        String classes = UserDatabaseHandler.getClasses(username);
-        if(classes == null)
-        {
-            out.println("<tr>\n" +
-                    "<td>No classes yet!</td>\n" +
-                    "<td>Click above to add your first class!</td>\n" +
-                    "</tr>");
-        }else{
-            String[] classArray = classes.split(",");
-            int index = 0;
-            while(index < classArray.length)
-            {
-                out.print("<tr>\n" +
-                    "<td>"+ classArray[index]+"</td>\n" +
-                    "<td>"+ classArray[index]+"</td>\n" +
-                    "</tr>");
-                index++;
-            }
-        }
-        out.println("</table>");
-    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

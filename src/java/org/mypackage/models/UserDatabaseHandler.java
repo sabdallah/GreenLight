@@ -98,8 +98,12 @@ public class UserDatabaseHandler {
             rs.next();
 
             result = rs.getString("CLASSES");
+            if(result == null)
+                result = "";
+            else
+                result = result + ",";
             
-            sql = "UPDATE Root.accounts SET classes = '" + result + "," + id +"' WHERE CAST(email AS VARCHAR(128)) ='" + email + "'";
+            sql = "UPDATE Root.accounts SET classes = '" + result + id +"' WHERE CAST(email AS VARCHAR(128)) ='" + email + "'";
             stmt.execute(sql);
             
             rs.close();
