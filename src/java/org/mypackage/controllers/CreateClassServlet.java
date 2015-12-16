@@ -78,6 +78,12 @@ public class CreateClassServlet extends HttpServlet {
             dispatcher.forward(request, response);
             return;
         } 
+        if(!UserDatabaseHandler.isTeacher((String) ses.getAttribute("username")))
+        {
+            request.setAttribute("error", new StringHolder("You're not a teacher... Nice try bud."));
+            dispatcher.forward(request, response);
+            return;
+        }    
         addClass(name, pass1, username);
         dispatcher = getServletContext().getRequestDispatcher("/sendConfirmation.jsp");
         dispatcher.forward(request, response);
