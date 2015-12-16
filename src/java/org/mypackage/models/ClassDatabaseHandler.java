@@ -242,7 +242,7 @@ public class ClassDatabaseHandler {
             System.out.println("Creating statement... createRoom");
             stmt = conn.createStatement();
             String sql;
-            sql = "INSERT INTO Root.Data (room,understand,total, name, password) VALUES(" + room + ",0,0,"+name +","+ password + ")";
+            sql = "INSERT INTO Root.Data (room,understand,total, name, password) VALUES(" + room + ",0,0,'"+name +"','"+ password + "')";
             stmt.execute(sql);
 
             stmt.close();

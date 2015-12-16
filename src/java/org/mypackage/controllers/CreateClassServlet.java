@@ -52,7 +52,7 @@ public class CreateClassServlet extends HttpServlet {
         if (request.getParameter("password") != null && request.getParameter("password2") != null && request.getParameter("classname") != null) {
             pass1 = (String) request.getParameter("password");
             pass2 = (String) request.getParameter("password2");
-            name = (String) request.getParameter("name");
+            name = (String) request.getParameter("classname");
          
         } else {
             request.setAttribute("error", new StringHolder("Please fill out all of the required information"));
