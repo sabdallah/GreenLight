@@ -27,6 +27,7 @@ import org.mypackage.models.ClassDatabaseHandler;
 import org.mypackage.models.Encryption;
 import org.mypackage.models.StringHolder;
 import org.mypackage.models.UserDatabaseHandler;
+import org.mypackage.models.panelCreator;
 
 /**
  *
@@ -85,8 +86,8 @@ public class CreateClassServlet extends HttpServlet {
             return;
         }    
         addClass(name, pass1, username);
-        dispatcher = getServletContext().getRequestDispatcher("/sendConfirmation.jsp");
-        dispatcher.forward(request, response);
+        PrintWriter out = response.getWriter();
+        new panelCreator(out, username, !UserDatabaseHandler.isTeacher(username));
 
     }
      

@@ -58,7 +58,6 @@ public class LoginServlet extends HttpServlet {
             //request.setAttribute("error", new StringHolder("User not verified, check your email."));
             //dispatcher.forward(request, response);
         //}
-        ses.setAttribute("username", username);
         PrintWriter out = response.getWriter();
         new panelCreator(out, username, !UserDatabaseHandler.isTeacher(username));
     }
