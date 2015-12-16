@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import org.mypackage.models.ClassDatabaseHandler;
 import org.mypackage.models.StringHolder;
 import org.mypackage.models.UserDatabaseHandler;
+import org.mypackage.models.panelCreator;
 
 /**
  *
@@ -56,8 +57,10 @@ public class JoinClassServlet extends HttpServlet {
             dispatcher.forward(request, response);
             return;
         }
-        
-        UserDatabaseHandler.addRoom(id2, (String) ses.getAttribute("username"));
+        String username = (String) ses.getAttribute("username");
+        UserDatabaseHandler.addRoom(id2, username);
+        PrintWriter out = response.getWriter();
+        new panelCreator(out, username, !UserDatabaseHandler.isTeacher(username));
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
