@@ -27,7 +27,7 @@ public class panelCreator {
                         "</br>\n");
             out.println("<h1>Welcome " + username + "</h1>");
             //creates the table of classes
-            createTable(out,username);
+            createTableStudent(out,username);
             out.println("</body>");
             out.println("</html>");
             
@@ -46,7 +46,7 @@ public class panelCreator {
                         "</br>\n");
             out.println("<h1>Welcome " + username + "</h1>");
             //creates the table of classes
-            createTable(out,username);
+            createTableTeacher(out,username);
             out.println("</body>");
             out.println("</html>");
             return;
@@ -54,7 +54,7 @@ public class panelCreator {
         }
     }
     
-    private void createTable(PrintWriter out, String username)
+    private void createTableStudent(PrintWriter out, String username)
     {
         out.println("<table border=\"5\">");
         //labels
@@ -76,8 +76,41 @@ public class panelCreator {
             while(index < classArray.length)
             {
                 out.print("<tr>\n" +
+                    "<td>"+ ClassDatabaseHandler.getName(Integer.parseInt(classArray[index]))+"</td>\n" +
+                    "<td><a href = \"TeacherServlet?id="+ classArray[index]+"\">Join<a></td>\n" +
+                    "</tr>");
+                index++;
+            }
+        }
+        out.println("</table>");
+    }
+    
+    private void createTableTeacher(PrintWriter out, String username)
+    {
+        out.println("<table border=\"5\">");
+        //labels
+        out.println("<tr>\n" +
+                    "<td>Class</td>\n" +
+                    "<td>Link</td>\n" +
+                    "<td>Class ID</td>\n" +
+                    "</tr>");
+        
+        String classes = UserDatabaseHandler.getClasses(username);
+        if(classes == null)
+        {
+            out.println("<tr>\n" +
+                    "<td>No classes yet!</td>\n" +
+                    "<td>Click above to create your first class!</td>\n" +
+                    "</tr>");
+        }else{
+            String[] classArray = classes.split(",");
+            int index = 0;
+            while(index < classArray.length)
+            {
+                out.print("<tr>\n" +
+                    "<td>"+ ClassDatabaseHandler.getName(Integer.parseInt(classArray[index]))+"</td>\n" +
+                    "<td><a href = \"TeacherServlet?id="+ classArray[index]+"\">Join<a></td>\n" +
                     "<td>"+ classArray[index]+"</td>\n" +
-                    "<td><a href = \"StudentServlet?id="+ classArray[index]+"\">Join<a></td>\n" +
                     "</tr>");
                 index++;
             }

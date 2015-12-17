@@ -59,7 +59,7 @@ public class LoginServlet extends HttpServlet {
             //dispatcher.forward(request, response);
         //}
         PrintWriter out = response.getWriter();
-        new panelCreator(out, username, !UserDatabaseHandler.isTeacher(username));
+        new panelCreator(out, username, UserDatabaseHandler.isTeacher(username));
     }
     
 
