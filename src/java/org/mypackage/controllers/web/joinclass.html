@@ -90,7 +90,7 @@
                 <form name="JoinClass" action="JoinClassServlet">  
 
                     <div class="form-group">
-                        <label for="ClassID">Class Name</label>
+                        <label for="ClassID">Class ID</label>
                         <input type="text" name="classID" class="form-control" id="ClassID" placeholder="Enter class ID">
                     </div>
                     <div class="form-group">

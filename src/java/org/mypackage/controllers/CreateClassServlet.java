@@ -47,7 +47,7 @@ public class CreateClassServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
 
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/failRegister.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/failNewClassPage.jsp");
         String pass1, pass2, name;
         InternetAddress i = null;
         HttpSession ses = request.getSession();
