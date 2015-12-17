@@ -42,36 +42,39 @@ public class TeacherServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Room room = new Room(0);
-
+     Room room = new Room(0);
         HttpSession ses = request.getSession(true);
-        if (ses.getAttribute("ClassNum") == null) {
-            room = makeNewRoom();
-            ses.setAttribute("ClassNum", room.getRoomNum());
-        } else {
-            room = new Room((int) ses.getAttribute("ClassNum"));
+
+        try {
+            room = makeNewRoom(request.getParameter("id"));
+            ses.setAttribute("roomNum", request.getParameter("id"));
+        } catch (IOException e) {
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/failIndex.html");
+            dispatcher.forward(request, response);
+            return;
         }
+
+
+        ses.setAttribute("ClassNum", room.getRoomNum());
+
         request.setAttribute(id, room);
-        ses.setAttribute("roomNum", room.getRoomNum());
+        room.loadData();
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/teacherResponse.jsp");
         dispatcher.forward(request, response);
     }
 
     /**
-     * Generates a random number for a room that does not already exist and then
-     * creates that room in the database and as a Room class.
+     * Creates a new room object if the room that was requested exists.
      */
-    public Room makeNewRoom() {
-        Random rand = new Random();
-        int num = rand.nextInt(10000) + 1;
-        while (ClassDatabaseHandler.checkRoom(num)) {
-            num = rand.nextInt(10000) + 1;
+    public Room makeNewRoom(String roomNum) throws IOException {
+        if (ClassDatabaseHandler.checkRoom(Integer.parseInt(roomNum))) {
+            Room room = new Room(Integer.parseInt(roomNum));
+            return room;
         }
-        ClassDatabaseHandler.createRoom(num, "Blank", "password");
-        Room room = new Room(num);
-        return room;
+
+        throw new IOException("Room doesn't exist");
+
     }
-    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
