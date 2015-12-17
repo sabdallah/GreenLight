@@ -87,7 +87,7 @@
         <br>
         <div class="container">
             <div class="col-md-12">
-                <form name="JoinClass" action="JoinClassServlet">  
+                <form name="JoinClass" action="JoinClassServlet" method="post">  
 
                     <div class="form-group">
                         <label for="ClassID">Class ID</label>

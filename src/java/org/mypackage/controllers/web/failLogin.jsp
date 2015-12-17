@@ -87,7 +87,7 @@
         <br>
         <div class="container">
             <div class="col-md-12">
-                <form name="Login" action="LoginServlet">  
+                <form name="Login" action="LoginServlet" method="post">  
                     <div class=""form-group has-error"">
                          <label for="exampleInputEmail1">Email address</label>
                         <input type="text" name="username" class="form-control" id="exampleInputEmail1" placeholder="Enter email">

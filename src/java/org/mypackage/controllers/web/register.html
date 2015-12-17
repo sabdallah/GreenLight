@@ -87,7 +87,7 @@
         <br>
         <div class="container">
             <div class="col-md-12">
-                <form name="Register" action="RegisterServlet">  
+                <form name="Register" action="RegisterServlet" method="post">  
 
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
