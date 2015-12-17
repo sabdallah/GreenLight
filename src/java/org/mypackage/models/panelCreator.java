@@ -22,9 +22,9 @@ public class panelCreator {
             out.println("</head>");
             out.println("<body>");
             //creates button to add class
-            out.println("<form action=\"NewClassServlet\">\n" +
-                        "<input type=\"submit\" value=\"Add Class\" />\n" +
-                        "</form>");
+            out.println("<br>\n" +
+                        "<a href=\"joinclass.html\" class=\"btn btn-block btn-lg btn-info\">Join Class</a>  \n" +
+                        "</br>\n");
             out.println("<h1>Welcome " + username + "</h1>");
             //creates the table of classes
             createTable(out,username);
@@ -42,8 +42,8 @@ public class panelCreator {
             out.println("<body>");
             //creates button to add class
             out.println("<br>\n" +
-"                <a href=\"NewClassPage.html\" class=\"btn btn-block btn-lg btn-info\">Create new class</a>  \n" +
-"                </br>\n");
+                        "<a href=\"NewClassPage.html\" class=\"btn btn-block btn-lg btn-info\">Create new class</a>  \n" +
+                        "</br>\n");
             out.println("<h1>Welcome " + username + "</h1>");
             //creates the table of classes
             createTable(out,username);
@@ -77,7 +77,7 @@ public class panelCreator {
             {
                 out.print("<tr>\n" +
                     "<td>"+ classArray[index]+"</td>\n" +
-                    "<td>"+ classArray[index]+"</td>\n" +
+                    "<td><a href = \"StudentServlet?id="+ classArray[index]+"\">Join<a></td>\n" +
                     "</tr>");
                 index++;
             }
