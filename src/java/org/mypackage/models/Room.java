@@ -13,7 +13,7 @@ import java.io.Serializable;
 public final class Room implements Serializable {
 
     private int understandingStudents, totalStudents, roomNum;
-    public final String colors[] = {"00FF40", "00FF00", "40FF00", "80FF00", "BFFF00", "FFFF00", "FFBF00", "FF0000", "FF0040", "FE2E64"};
+    public final String colors[] = {"#00FF00","#40FF00","#80FF00","#BFFF00","#FFFF00","#FFBF00","#FF8000","#FF4000","#FF0000","#B40404"};
 
     public Room(int room) {
         roomNum = room;
