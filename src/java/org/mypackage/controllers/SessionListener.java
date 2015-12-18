@@ -39,6 +39,7 @@ public class SessionListener implements HttpSessionListener {
             if ((boolean) ses.getAttribute("understand") == true) {
                 room.removeGood();
             }
+            ses.setAttribute("understand",null); 
             room.loadData();
         }
     }

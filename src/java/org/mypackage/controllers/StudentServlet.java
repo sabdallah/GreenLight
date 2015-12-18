@@ -51,14 +51,13 @@ public class StudentServlet extends HttpServlet {
             dispatcher.forward(request, response);
             return;
         }
-        if (request.getParameter("Submit Button") != null) {
-            ses.setAttribute("understand", null);
-        }
+        
         if (ses.getAttribute("understand") == null) {
             ses.setAttribute("understand", true);
             room.addKid();
             room.addGood();
         }
+        
         boolean understand = (boolean) ses.getAttribute("understand");
 
         if (request.getParameter("formVal") != null && request.getParameter("formVal").equals("confused")) {
