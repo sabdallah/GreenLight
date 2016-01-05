@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.mypackage.models.ClassDatabaseHandler;
 import org.mypackage.models.Room;
+import org.mypackage.models.UserDatabaseHandler;
 
 /**
  *
@@ -43,12 +44,16 @@ public class StudentServlet extends HttpServlet {
         Room room = new Room(0);
         HttpSession ses = request.getSession(true);
 
+        String user = (String) ses.getAttribute("username");
+        String classes = UserDatabaseHandler.getClasses(user);
+        if(!classes.contains((String)request.getParameter("id")))
+            return;
+        
+        
         try {
             room = makeNewRoom(request.getParameter("id"));
             ses.setAttribute("roomNum", request.getParameter("id"));
         } catch (IOException e) {
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/failIndex.html");
-            dispatcher.forward(request, response);
             return;
         }
         

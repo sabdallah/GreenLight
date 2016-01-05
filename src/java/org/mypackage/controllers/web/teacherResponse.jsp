@@ -10,6 +10,12 @@
     <jsp:useBean id="teacherBean" scope="request" class="org.mypackage.models.Room" />
 
     <head>
+                <!-- Loading Bootstrap -->
+        <link href="dist/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Loading Flat UI -->
+        <link href="dist/css/flat-ui.css" rel="stylesheet">
+        <link href="docs/assets/css/demo.css" rel="stylesheet">
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
         <script>
             function refresh(){
@@ -29,6 +35,6 @@
     </head>
     <body>
         <h1 align="center">Welcome to Room  <jsp:getProperty name="teacherBean" property="roomNum" /></h1>
-        <br><div id="percent">0</div>
+        <br><div id="percent"></div>
     </body>
 </html>

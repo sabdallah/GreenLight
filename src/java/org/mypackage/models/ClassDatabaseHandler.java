@@ -6,7 +6,6 @@ package org.mypackage.models;
 import java.sql.*;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
-import static org.mypackage.models.UserDatabaseHandler.isUser;
 
 /**
  *
@@ -24,18 +23,20 @@ public class ClassDatabaseHandler {
      */
     static int[] getRoomStats(int room) {
         Connection conn = null;
-        Statement stmt = null;
         int[] results = new int[2];
         try {
 
-            System.out.println("Connecting to database...");
             conn = ((DataSource) new InitialContext().lookup("jdbc/ConfusOMeter")).getConnection();
 
-            System.out.println("Creating statement... getRoomStats");
-            stmt = conn.createStatement();
             String sql;
-            sql = "SELECT total, understand FROM Root.Data WHERE room =" + room + "";
-            ResultSet rs = stmt.executeQuery(sql);
+            sql = "SELECT total, understand FROM Root.Data WHERE room =?";
+
+            PreparedStatement preparedStatement
+                    = conn.prepareStatement(sql);
+
+            preparedStatement.setInt(1, room);
+
+            ResultSet rs = preparedStatement.executeQuery();
 
             rs.next();
 
@@ -43,7 +44,7 @@ public class ClassDatabaseHandler {
             results[0] = rs.getInt("understand");
 
             rs.close();
-            stmt.close();
+            preparedStatement.close();
             conn.close();
         } catch (SQLException se) {
 
@@ -52,13 +53,6 @@ public class ClassDatabaseHandler {
 
             e.printStackTrace();
         } finally {
-
-            try {
-                if (stmt != null) {
-                    stmt.close();
-                }
-            } catch (SQLException se2) {
-            }
             try {
                 if (conn != null) {
                     conn.close();
@@ -67,30 +61,32 @@ public class ClassDatabaseHandler {
                 se.printStackTrace();
             }
         }
-        System.out.println("Disconnecting!");
+
         return results;
     }
-        static String getName(int room) {
+
+    static String getName(int room) {
         Connection conn = null;
-        Statement stmt = null;
         String result = "";
         try {
 
-            System.out.println("Connecting to database...");
             conn = ((DataSource) new InitialContext().lookup("jdbc/ConfusOMeter")).getConnection();
 
-            System.out.println("Creating statement... getRoomStats");
-            stmt = conn.createStatement();
             String sql;
-            sql = "SELECT name FROM Root.Data WHERE room =" + room + "";
-            ResultSet rs = stmt.executeQuery(sql);
+            sql = "SELECT name FROM Root.Data WHERE room =?";
+            PreparedStatement preparedStatement
+                    = conn.prepareStatement(sql);
+
+            preparedStatement.setInt(1, room);
+
+            ResultSet rs = preparedStatement.executeQuery();
 
             rs.next();
 
             result = rs.getString("name");
 
             rs.close();
-            stmt.close();
+            preparedStatement.close();
             conn.close();
         } catch (SQLException se) {
 
@@ -101,12 +97,6 @@ public class ClassDatabaseHandler {
         } finally {
 
             try {
-                if (stmt != null) {
-                    stmt.close();
-                }
-            } catch (SQLException se2) {
-            }
-            try {
                 if (conn != null) {
                     conn.close();
                 }
@@ -114,7 +104,7 @@ public class ClassDatabaseHandler {
                 se.printStackTrace();
             }
         }
-        System.out.println("Disconnecting!");
+
         return result;
     }
 
@@ -123,27 +113,32 @@ public class ClassDatabaseHandler {
      */
     static void changeTotal(int room, int i) {
         Connection conn = null;
-        Statement stmt = null;
         try {
-            System.out.println("Connecting to database... ");
             conn = ((DataSource) new InitialContext().lookup("jdbc/ConfusOMeter")).getConnection();
 
-            System.out.println("Creating statement... changeTotal");
-            stmt = conn.createStatement();
             String sql;
-            sql = "SELECT total FROM Root.Data WHERE room =" + room + "";
-            ResultSet rs = stmt.executeQuery(sql);
+            sql = "SELECT total FROM Root.Data WHERE room =?";
+            PreparedStatement preparedStatement
+                    = conn.prepareStatement(sql);
+
+            preparedStatement.setInt(1, room);
+
+            ResultSet rs = preparedStatement.executeQuery();
 
             rs.next();
 
             int total = rs.getInt("total");
             total += i;
 
-            sql = "UPDATE Root.data SET total = " + total + " WHERE room =" + room + "";
-            stmt.execute(sql);
+            sql = "UPDATE Root.data SET total =? WHERE room =?";
+
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, total);
+            preparedStatement.setInt(2, room);
+            preparedStatement.executeUpdate();
 
             rs.close();
-            stmt.close();
+            preparedStatement.close();
             conn.close();
         } catch (SQLException se) {
 
@@ -152,13 +147,6 @@ public class ClassDatabaseHandler {
 
             e.printStackTrace();
         } finally {
-
-            try {
-                if (stmt != null) {
-                    stmt.close();
-                }
-            } catch (SQLException se2) {
-            }
             try {
                 if (conn != null) {
                     conn.close();
@@ -167,7 +155,7 @@ public class ClassDatabaseHandler {
                 se.printStackTrace();
             }
         }
-        System.out.println("Disconnecting!");
+
     }
 
     /**
@@ -175,28 +163,34 @@ public class ClassDatabaseHandler {
      */
     static void changeUnderstand(int room, int i) {
         Connection conn = null;
-        Statement stmt = null;
         try {
 
             System.out.println("Connecting to database...");
             conn = ((DataSource) new InitialContext().lookup("jdbc/ConfusOMeter")).getConnection();
 
             System.out.println("Creating statement... changeUnderstand");
-            stmt = conn.createStatement();
             String sql;
-            sql = "SELECT understand FROM Root.Data WHERE room =" + room + "";
-            ResultSet rs = stmt.executeQuery(sql);
+            sql = "SELECT understand FROM Root.Data WHERE room =?";
+            PreparedStatement preparedStatement
+                    = conn.prepareStatement(sql);
+
+            preparedStatement.setInt(1, room);
+
+            ResultSet rs = preparedStatement.executeQuery();
 
             rs.next();
 
             int understand = rs.getInt("understand");
             understand += i;
 
-            sql = "UPDATE Root.data SET understand = " + understand + " WHERE room =" + room + "";
-            stmt.execute(sql);
+            sql = "UPDATE Root.data SET understand =? WHERE room =?";
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setInt(1, understand);
+            preparedStatement.setInt(2, room);
+            preparedStatement.executeUpdate();
 
             rs.close();
-            stmt.close();
+            preparedStatement.close();
             conn.close();
         } catch (SQLException se) {
 
@@ -206,12 +200,6 @@ public class ClassDatabaseHandler {
             e.printStackTrace();
         } finally {
 
-            try {
-                if (stmt != null) {
-                    stmt.close();
-                }
-            } catch (SQLException se2) {
-            }
             try {
                 if (conn != null) {
                     conn.close();
@@ -231,22 +219,24 @@ public class ClassDatabaseHandler {
      */
     public static void createRoom(int room, String name, String password) {
         Connection conn = null;
-        Statement stmt = null;
         if (checkRoom(room)) {
             return;
         }
         try {
 
-            System.out.println("Connecting to database...");
             conn = ((DataSource) new InitialContext().lookup("jdbc/ConfusOMeter")).getConnection();
-
-            System.out.println("Creating statement... createRoom");
-            stmt = conn.createStatement();
             String sql;
-            sql = "INSERT INTO Root.Data (room,understand,total, name, password) VALUES(" + room + ",0,0,'"+name +"','"+ password + "')";
-            stmt.execute(sql);
+            sql = "INSERT INTO Root.Data (room,understand,total, name, password) VALUES(?,0,0,?,?)";
+            PreparedStatement preparedStatement
+                    = conn.prepareStatement(sql);
 
-            stmt.close();
+            preparedStatement.setInt(1, room);
+            preparedStatement.setString(2, name);
+            preparedStatement.setString(3, password);
+
+            preparedStatement.executeUpdate();
+
+            preparedStatement.close();
             conn.close();
         } catch (SQLException se) {
 
@@ -257,12 +247,6 @@ public class ClassDatabaseHandler {
         } finally {
 
             try {
-                if (stmt != null) {
-                    stmt.close();
-                }
-            } catch (SQLException se2) {
-            }
-            try {
                 if (conn != null) {
                     conn.close();
                 }
@@ -272,25 +256,25 @@ public class ClassDatabaseHandler {
         }
         System.out.println("Disconnecting!");
     }
-    
-    
+
     /**
      * Checks if a room exists in the database.
      */
     public static boolean checkRoom(int room) {
         Connection conn = null;
-        Statement stmt = null;
         boolean result = false;
         try {
 
-            System.out.println("Connecting to database...");
             conn = ((DataSource) new InitialContext().lookup("jdbc/ConfusOMeter")).getConnection();
 
             System.out.println("Creating statement... checkRoom");
-            stmt = conn.createStatement();
             String sql;
-            sql = "SELECT room FROM Root.Data WHERE room =" + room + "";
-            ResultSet rs = stmt.executeQuery(sql);
+            sql = "SELECT room FROM Root.Data WHERE room =?";
+            PreparedStatement preparedStatement
+                    = conn.prepareStatement(sql);
+
+            preparedStatement.setInt(1, room);
+            ResultSet rs = preparedStatement.executeQuery();
 
             rs.next();
             try {
@@ -302,7 +286,7 @@ public class ClassDatabaseHandler {
             }
 
             rs.close();
-            stmt.close();
+            preparedStatement.close();
             conn.close();
         } catch (SQLException se) {
 
@@ -312,12 +296,6 @@ public class ClassDatabaseHandler {
             e.printStackTrace();
         } finally {
 
-            try {
-                if (stmt != null) {
-                    stmt.close();
-                }
-            } catch (SQLException se2) {
-            }
             try {
                 if (conn != null) {
                     conn.close();
@@ -329,32 +307,31 @@ public class ClassDatabaseHandler {
         System.out.println("Disconnecting!");
         return result;
     }
-    
+
     public static boolean checkPassword(int id, String password) {
         Connection conn = null;
         Statement stmt = null;
         boolean result = false;
         try {
-            if(!checkRoom(id))
+            if (!checkRoom(id)) {
                 return false;
-            System.out.println("Connecting to database...");
+            }
             conn = ((DataSource) new InitialContext().lookup("jdbc/ConfusOMeter")).getConnection();
 
-            System.out.println("Creating statement... checkPassword");
             stmt = conn.createStatement();
             String sql;
             sql = "SELECT * FROM Root.Data";
             ResultSet rs = stmt.executeQuery(sql);
 
             try {
-                while(!result && rs.next())
-                {
-                if (rs.getInt("room")==id) {
-                    if(rs.getString("password").equals(password))
-                        result = true;
-                    else
-                        break;
-                }
+                while (!result && rs.next()) {
+                    if (rs.getInt("room") == id) {
+                        if (rs.getString("password").equals(password)) {
+                            result = true;
+                        } else {
+                            break;
+                        }
+                    }
                 }
             } catch (SQLException e) {
                 result = false;

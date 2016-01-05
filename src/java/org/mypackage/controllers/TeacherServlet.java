@@ -5,10 +5,7 @@
  */
 package org.mypackage.controllers;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.Random;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.mypackage.models.ClassDatabaseHandler;
 import org.mypackage.models.Room;
+import org.mypackage.models.UserDatabaseHandler;
 
 /**
  *
@@ -32,8 +30,9 @@ public class TeacherServlet extends HttpServlet {
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
-     * 
-     * Makes a new room if a room does not exist, then sends the user to the teacherResponse page.
+     *
+     * Makes a new room if a room does not exist, then sends the user to the
+     * teacherResponse page.
      *
      * @param request servlet request
      * @param response servlet response
@@ -42,8 +41,14 @@ public class TeacherServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-     Room room = new Room(0);
+        Room room = new Room(0);
         HttpSession ses = request.getSession(true);
+
+        String user = (String) ses.getAttribute("username");
+        String classes = UserDatabaseHandler.getClasses(user);
+        if (!classes.contains((String) request.getParameter("id"))) {
+            return;
+        }
 
         try {
             room = makeNewRoom(request.getParameter("id"));
@@ -53,7 +58,6 @@ public class TeacherServlet extends HttpServlet {
             dispatcher.forward(request, response);
             return;
         }
-
 
         ses.setAttribute("ClassNum", room.getRoomNum());
 

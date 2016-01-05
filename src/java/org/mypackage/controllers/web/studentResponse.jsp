@@ -10,6 +10,12 @@
     <jsp:useBean id="studentBean" scope="request" class="org.mypackage.models.Room" />
 
     <head>
+                <!-- Loading Bootstrap -->
+        <link href="dist/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Loading Flat UI -->
+        <link href="dist/css/flat-ui.css" rel="stylesheet">
+        <link href="docs/assets/css/demo.css" rel="stylesheet">
         <style>
             .greenButton {
                 background:url(https://dl.dropboxusercontent.com/u/11260538/greenbutton.png) no-repeat;
