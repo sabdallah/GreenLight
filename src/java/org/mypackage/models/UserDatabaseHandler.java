@@ -6,6 +6,7 @@
 package org.mypackage.models;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -30,26 +31,27 @@ public class UserDatabaseHandler {
      */
     public static String getClasses(String email) {
         Connection conn = null;
-        Statement stmt = null;
         String result = "";
         email = email.substring(0,email.indexOf("@")) + " " + email.substring(email.indexOf("@")+1);
         try {
 
-            System.out.println("Connecting to database...");
             conn = ((DataSource) new InitialContext().lookup("jdbc/ConfusOMeter")).getConnection();
 
-            System.out.println("Creating statement... getClasses");
-            stmt = conn.createStatement();
             String sql;
-            sql = "SELECT classes FROM Root.accounts WHERE CAST(email AS VARCHAR(128)) ='" + email + "'";
-            ResultSet rs = stmt.executeQuery(sql);
+            sql = "SELECT classes FROM Root.accounts WHERE CAST(email AS VARCHAR(128)) =?";
+              PreparedStatement preparedStatement
+                    = conn.prepareStatement(sql);
+
+            preparedStatement.setString(1, email);
+
+            ResultSet rs = preparedStatement.executeQuery();
 
             rs.next();
 
             result = rs.getString("classes");
 
             rs.close();
-            stmt.close();
+            preparedStatement.close();
             conn.close();
         } catch (SQLException se) {
 
@@ -58,13 +60,6 @@ public class UserDatabaseHandler {
 
             e.printStackTrace();
         } finally {
-
-            try {
-                if (stmt != null) {
-                    stmt.close();
-                }
-            } catch (SQLException se2) {
-            }
             try {
                 if (conn != null) {
                     conn.close();
@@ -73,27 +68,27 @@ public class UserDatabaseHandler {
                 se.printStackTrace();
             }
         }
-        System.out.println("Disconnecting!");
         return result;
     }
     
     public static void addRoom(int id, String email){
         email = email.substring(0,email.indexOf("@")) + " " + email.substring(email.indexOf("@")+1);
         Connection conn = null;
-        Statement stmt = null;
         String result = null;
         try {
 
-            System.out.println("Connecting to database...");
             conn = ((DataSource) new InitialContext().lookup("jdbc/ConfusOMeter")).getConnection();
 
-            System.out.println("Creating statement... isVerified");
-            stmt = conn.createStatement();
             
             String sql;
             
-            sql = "SELECT classes FROM Root.accounts WHERE CAST(email AS VARCHAR(128)) ='" + email + "'";
-            ResultSet rs = stmt.executeQuery(sql);
+            sql = "SELECT classes FROM Root.accounts WHERE CAST(email AS VARCHAR(128)) =?";
+              PreparedStatement preparedStatement
+                    = conn.prepareStatement(sql);
+
+            preparedStatement.setString(1, email);
+
+            ResultSet rs = preparedStatement.executeQuery();
 
             rs.next();
 
@@ -103,11 +98,17 @@ public class UserDatabaseHandler {
             else
                 result = result + ",";
             
-            sql = "UPDATE Root.accounts SET classes = '" + result + id +"' WHERE CAST(email AS VARCHAR(128)) ='" + email + "'";
-            stmt.execute(sql);
+            sql = "UPDATE Root.accounts SET classes =? WHERE CAST(email AS VARCHAR(128)) =?";
+            preparedStatement
+                    = conn.prepareStatement(sql);
+
+            preparedStatement.setString(1, result + id);
+            preparedStatement.setString(2, email);
+
+            preparedStatement.executeUpdate();
             
             rs.close();
-            stmt.close();
+            preparedStatement.close();
             conn.close();
         } catch (SQLException se) {
 
@@ -116,13 +117,6 @@ public class UserDatabaseHandler {
 
             e.printStackTrace();
         } finally {
-
-            try {
-                if (stmt != null) {
-                    stmt.close();
-                }
-            } catch (SQLException se2) {
-            }
             try {
                 if (conn != null) {
                     conn.close();
@@ -136,26 +130,27 @@ public class UserDatabaseHandler {
 
     public static boolean isVerified(String email) {
         Connection conn = null;
-        Statement stmt = null;
         boolean result = false;
         email = email.substring(0,email.indexOf("@")) + " " + email.substring(email.indexOf("@")+1);
         try {
 
-            System.out.println("Connecting to database...");
             conn = ((DataSource) new InitialContext().lookup("jdbc/ConfusOMeter")).getConnection();
 
-            System.out.println("Creating statement... isVerified");
-            stmt = conn.createStatement();
             String sql;
-            sql = "SELECT verified FROM Root.accounts WHERE email ='" + email + "'";
-            ResultSet rs = stmt.executeQuery(sql);
+            sql = "SELECT verified FROM Root.accounts WHERE email =?";
+               PreparedStatement preparedStatement
+                    = conn.prepareStatement(sql);
+
+            preparedStatement.setString(1, email);
+
+            ResultSet rs = preparedStatement.executeQuery();
 
             rs.next();
 
             result = rs.getBoolean("verified");
 
             rs.close();
-            stmt.close();
+            preparedStatement.close();
             conn.close();
         } catch (SQLException se) {
 
@@ -165,12 +160,6 @@ public class UserDatabaseHandler {
             e.printStackTrace();
         } finally {
 
-            try {
-                if (stmt != null) {
-                    stmt.close();
-                }
-            } catch (SQLException se2) {
-            }
             try {
                 if (conn != null) {
                     conn.close();
@@ -188,20 +177,21 @@ public class UserDatabaseHandler {
      */
     public static void verify(String email) {
         Connection conn = null;
-        Statement stmt = null;
         email = email.substring(0,email.indexOf("@")) + " " + email.substring(email.indexOf("@")+1);
         try {
-            System.out.println("Connecting to database... ");
             conn = ((DataSource) new InitialContext().lookup("jdbc/ConfusOMeter")).getConnection();
 
-            System.out.println("Creating statement... verify");
-            stmt = conn.createStatement();
             String sql;
 
-            sql = "UPDATE Root.accounts SET verified = true WHERE email ='" + email + "'";
-            stmt.execute(sql);
+            sql = "UPDATE Root.accounts SET verified = true WHERE email =?";
+               PreparedStatement preparedStatement
+                    = conn.prepareStatement(sql);
 
-            stmt.close();
+            preparedStatement.setString(1, email);
+
+            preparedStatement.executeUpdate();
+
+            preparedStatement.close();
             conn.close();
         } catch (SQLException se) {
 
@@ -211,12 +201,6 @@ public class UserDatabaseHandler {
             e.printStackTrace();
         } finally {
 
-            try {
-                if (stmt != null) {
-                    stmt.close();
-                }
-            } catch (SQLException se2) {
-            }
             try {
                 if (conn != null) {
                     conn.close();
@@ -230,23 +214,24 @@ public class UserDatabaseHandler {
 
     public static void addUser(String username, String password) {
         Connection conn = null;
-        Statement stmt = null;
         if (isUser(username)) {
             return;
         }
         username = username.substring(0,username.indexOf("@")) + " " + username.substring(username.indexOf("@")+1);
         try {
 
-            System.out.println("Connecting to database...");
             conn = ((DataSource) new InitialContext().lookup("jdbc/ConfusOMeter")).getConnection();
 
-            System.out.println("Creating statement... addUser");
-            stmt = conn.createStatement();
             String sql;
-            sql = "INSERT INTO Root.accounts (email, password, verified, teacher) VALUES('" + username + "','" + password + "',false, false)";
-            stmt.execute(sql);
+            sql = "INSERT INTO Root.accounts (email, password, verified, teacher) VALUES(?,?,false, false)";
+               PreparedStatement preparedStatement
+                    = conn.prepareStatement(sql);
 
-            stmt.close();
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
+
+            ResultSet rs = preparedStatement.executeQuery();
+            preparedStatement.close();
             conn.close();
         } catch (SQLException se) {
 
@@ -256,12 +241,6 @@ public class UserDatabaseHandler {
             e.printStackTrace();
         } finally {
 
-            try {
-                if (stmt != null) {
-                    stmt.close();
-                }
-            } catch (SQLException se2) {
-            }
             try {
                 if (conn != null) {
                     conn.close();
@@ -280,10 +259,8 @@ public class UserDatabaseHandler {
         username = username.substring(0,username.indexOf("@")) + " " + username.substring(username.indexOf("@")+1);
         try {
 
-            System.out.println("Connecting to database...");
             conn = ((DataSource) new InitialContext().lookup("jdbc/ConfusOMeter")).getConnection();
 
-            System.out.println("Creating statement... isUser");
             stmt = conn.createStatement();
             String sql;
             sql = "SELECT email FROM Root.accounts";
