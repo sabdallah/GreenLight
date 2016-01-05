@@ -40,7 +40,7 @@ public class JoinClassServlet extends HttpServlet {
         int id2 = 0;
         String password = "";
         HttpSession ses = request.getSession();
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/failLogin.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/failJoinClassPage.jsp");
         if (request.getParameter("classID") != null) {
             id1 = (String) request.getParameter("classID");
             id2 = Integer.parseInt(id1);
@@ -49,7 +49,7 @@ public class JoinClassServlet extends HttpServlet {
             password = (String) request.getParameter("password");
         }
         if (!ClassDatabaseHandler.checkRoom(id2)) {
-            request.setAttribute("error", new StringHolder("There is no user with that email in our database."));
+            request.setAttribute("error", new StringHolder("There is no class with that ID in our database."));
             dispatcher.forward(request, response);
             return;
         } else if (!ClassDatabaseHandler.checkPassword(id2, password)) {
@@ -60,7 +60,7 @@ public class JoinClassServlet extends HttpServlet {
         String username = (String) ses.getAttribute("username");
         UserDatabaseHandler.addRoom(id2, username);
         PrintWriter out = response.getWriter();
-        new panelCreator(out, username, !UserDatabaseHandler.isTeacher(username));
+        new panelCreator(out, username, UserDatabaseHandler.isTeacher(username));
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
