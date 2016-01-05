@@ -302,7 +302,7 @@ public class UserDatabaseHandler {
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
 
-            ResultSet rs = preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
             preparedStatement.close();
             conn.close();
         } catch (SQLException se) {
