@@ -133,6 +133,78 @@ public class UserDatabaseHandler {
         }
         System.out.println("Disconnecting!");
     }
+    
+    public static void removeRoom(int id, String email){
+        email = email.substring(0,email.indexOf("@")) + " " + email.substring(email.indexOf("@")+1);
+        Connection conn = null;
+        Statement stmt = null;
+        String result = null;
+        try {
+
+            System.out.println("Connecting to database...");
+            conn = ((DataSource) new InitialContext().lookup("jdbc/ConfusOMeter")).getConnection();
+
+            System.out.println("Creating statement... isVerified");
+            stmt = conn.createStatement();
+            
+            String sql;
+            
+            sql = "SELECT classes FROM Root.accounts WHERE CAST(email AS VARCHAR(128)) ='" + email + "'";
+            ResultSet rs = stmt.executeQuery(sql);
+
+            rs.next();
+
+            result = rs.getString("CLASSES");
+            if(result == null)
+                result = "NULL";
+            else if(result.contains(""+id)){
+                String[] array = result.split(",");
+                String newResult = "";
+                for(String x:array){
+                    if(x != ""+id){
+                        if(newResult.length()>2)
+                            newResult = newResult + ",";
+                        newResult = newResult + id;
+                    } 
+                }
+                if(newResult.length() != 0)
+                    newResult = "'" + newResult + "'";
+                else
+                    newResult = "NULL";
+                
+                result = newResult;
+            }
+            
+            sql = "UPDATE Root.accounts SET classes = " + result +" WHERE CAST(email AS VARCHAR(128)) ='" + email + "'";
+            stmt.execute(sql);
+            
+            rs.close();
+            stmt.close();
+            conn.close();
+        } catch (SQLException se) {
+
+            se.printStackTrace();
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        } finally {
+
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException se2) {
+            }
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        System.out.println("Disconnecting!");
+    }
 
     public static boolean isVerified(String email) {
         Connection conn = null;
