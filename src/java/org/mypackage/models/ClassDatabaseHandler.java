@@ -208,7 +208,6 @@ public class ClassDatabaseHandler {
                 se.printStackTrace();
             }
         }
-        System.out.println("Disconnecting!");
     }
 
     /**
@@ -254,7 +253,6 @@ public class ClassDatabaseHandler {
                 se.printStackTrace();
             }
         }
-        System.out.println("Disconnecting!");
     }
 
     /**
@@ -267,7 +265,6 @@ public class ClassDatabaseHandler {
 
             conn = ((DataSource) new InitialContext().lookup("jdbc/ConfusOMeter")).getConnection();
 
-            System.out.println("Creating statement... checkRoom");
             String sql;
             sql = "SELECT room FROM Root.Data WHERE room =?";
             PreparedStatement preparedStatement
@@ -304,7 +301,6 @@ public class ClassDatabaseHandler {
                 se.printStackTrace();
             }
         }
-        System.out.println("Disconnecting!");
         return result;
     }
 
@@ -362,7 +358,6 @@ public class ClassDatabaseHandler {
                 se.printStackTrace();
             }
         }
-        System.out.println("Disconnecting!");
         return result;
     }
 
