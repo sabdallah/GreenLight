@@ -60,7 +60,7 @@ public class PercentServlet extends HttpServlet {
 
         HttpSession ses = request.getSession();
         Room room = makeNewRoom((String) ("" + ses.getAttribute("ClassNum")));
-        response.getWriter().write("" + room.getPercent());
+        response.getWriter().write("" + Math.round(room.getPercent()));
     }
     /**
      * Handles the HTTP <code>POST</code> method.
