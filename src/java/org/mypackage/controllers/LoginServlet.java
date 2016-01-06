@@ -39,11 +39,23 @@ public class LoginServlet extends HttpServlet {
         HttpSession ses = request.getSession();
         response.setContentType("text/html");
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/failLogin.jsp");
+     
+        
         if (request.getParameter("username") != null) {
             username = (String) request.getParameter("username");
         }
+        else {
+            request.setAttribute("error", new StringHolder("Please fill out all of the required information"));
+            dispatcher.forward(request, response);
+            return;
+        }
         if (request.getParameter("password") != null) {
             password = (String) request.getParameter("password");
+        }
+        else {
+            request.setAttribute("error", new StringHolder("Please fill out all of the required information"));
+            dispatcher.forward(request, response);
+            return;
         }
         ses.setAttribute("username", username);
         if (!UserDatabaseHandler.isUser(username)) {
