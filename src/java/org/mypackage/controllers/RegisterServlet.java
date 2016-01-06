@@ -67,7 +67,7 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
 
-        if (pass1.length() <= 6) {
+        if (pass1.length() < 6) {
             request.setAttribute("error", new StringHolder("Password must be at least 6 characters long"));
             dispatcher.forward(request, response);
             return;
