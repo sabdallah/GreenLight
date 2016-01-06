@@ -87,7 +87,7 @@ public class CreateClassServlet extends HttpServlet {
         }    
         addClass(name, pass1, username);
         PrintWriter out = response.getWriter();
-        new panelCreator(out, username, !UserDatabaseHandler.isTeacher(username));
+        new panelCreator(out, username, UserDatabaseHandler.isTeacher(username));
 
     }
      
