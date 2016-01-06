@@ -16,6 +16,7 @@
         <!-- Loading Flat UI -->
         <link href="dist/css/flat-ui.css" rel="stylesheet">
         <link href="docs/assets/css/demo.css" rel="stylesheet">
+    <a href="index.html"></a>
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
         <script>
             function refresh(){
@@ -34,7 +35,12 @@
         <title>Room <jsp:getProperty name="teacherBean" property="roomNum" /> Teacher</title>
     </head>
     <body>
-        <h1 align="center">Welcome to Room  <jsp:getProperty name="teacherBean" property="roomNum" /></h1>
-        <br><div id="percent"></div>
+        <div>
+            <br>
+            <br>
+            <h1 align="center">Welcome to Room  <jsp:getProperty name="teacherBean" property="roomNum" /></h1>
+            <h1 align="center"><br><div id="percent"></div></h1>
+        </div>
+        
     </body>
 </html>
