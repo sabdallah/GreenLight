@@ -10,7 +10,7 @@
     <jsp:useBean id="studentBean" scope="request" class="org.mypackage.models.Room" />
 
     <head>
-                <!-- Loading Bootstrap -->
+        <!-- Loading Bootstrap -->
         <link href="dist/css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Loading Flat UI -->
@@ -60,14 +60,17 @@
                    name="id"   
                    value=<jsp:getProperty name="studentBean" property="roomNum" /> /> 
             <input type='hidden' value="understand" name="formVal">
-            <input type="submit" value="Not Confused" name="Understand"class="greenButton"/>  
+            <input type="submit" value="Not Confused" name="Understand"class="btn btn-lg btn-success" style="width: 49%; height: 300px; "/> 
+            
         </form>
         <form name="Confused" action="StudentServlet" style="display:inline;" align="center">
             <input type="hidden"   
                    name="id"   
                    value=<jsp:getProperty name="studentBean" property="roomNum" /> /> 
             <input type='hidden' value="confused" name="formVal">
-            <input type="submit" value="Confused" name="Confused" class="redButton"/>  
+            <input type="submit" value="Confused" name="Confused" class="btn btn-lg btn-danger" style="width: 49%; height: 300px; "/>  
+
+
         </form>
     </center>
     <center>
