@@ -42,7 +42,11 @@ public class StudentServlet extends HttpServlet {
             throws ServletException, IOException {
 
         Room room = new Room(0);
-        HttpSession ses = request.getSession(true);
+        HttpSession ses = request.getSession(false);
+        if(ses == null){
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.html");
+            dispatcher.forward(request, response);
+        }
 
         String user = (String) ses.getAttribute("username");
         String classes = UserDatabaseHandler.getClasses(user);
