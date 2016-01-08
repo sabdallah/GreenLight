@@ -78,6 +78,7 @@ public class panelCreator {
                 out.print("<tr>\n" +
                     "<td>"+ ClassDatabaseHandler.getName(Integer.parseInt(classArray[index]))+"</td>\n" +
                     "<td><a href = \"StudentServlet?id="+ classArray[index]+"\">Join<a></td>\n" +
+                    "<td><a href = \"DeleteClassServlet?id="+ classArray[index]+"\">Leave<a></td>\n" +
                     "</tr>");
                 index++;
             }
@@ -111,6 +112,7 @@ public class panelCreator {
                     "<td>"+ ClassDatabaseHandler.getName(Integer.parseInt(classArray[index]))+"</td>\n" +
                     "<td><a href = \"TeacherServlet?id="+ classArray[index]+"\">Join<a></td>\n" +
                     "<td>"+ classArray[index]+"</td>\n" +
+                    "<td><a href = \"DeleteClassServlet?id="+ classArray[index]+"\">Delete<a></td>\n" +
                     "</tr>");
                 index++;
             }

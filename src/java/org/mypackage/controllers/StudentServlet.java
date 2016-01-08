@@ -41,7 +41,7 @@ public class StudentServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        Room room = new Room(0);
+        Room room = null;
         HttpSession ses = request.getSession(false);
         if(ses == null){
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.html");
