@@ -57,6 +57,7 @@
         
         <div class="col-lg-12" style="background-color: #34495E;" >
     <center>
+        <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
         <form name="Not Confused" action="StudentServlet" style="display:inline;" align="center">
             <input type="hidden"   
@@ -76,6 +77,7 @@
 
         </form>
          </div>
+        </div>
     </center>
         </div>
     <center>
