@@ -21,6 +21,11 @@ public final class Room implements Serializable {
         totalStudents = 0;
         loadData();
     }
+    
+    public String getName(){
+        return ClassDatabaseHandler.getName(roomNum);
+    
+    }
 
     /**
      * Gets the data from the ClassDatabaseHandler for use in calculations by
