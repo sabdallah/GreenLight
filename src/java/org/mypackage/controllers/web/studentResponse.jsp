@@ -51,11 +51,11 @@
         <title>Room <jsp:getProperty name="studentBean" property="roomNum" /> Student</title>
     </head>
     <body>
-        <h1 align="center">Welcome to Room  <jsp:getProperty name="studentBean" property="name" /></h1>
+        <h3 align="center">Welcome to <jsp:getProperty name="studentBean" property="name" />!</h3>
 
     <center><br><div id="percent"></div></center>
         
-        <div class="col-lg-12" style="background-color: #FFFFFF; padding-top: 20px; padding-bottom: 20px;" >
+        <div class="col-lg-12" style="background-color: #95a5a6; padding-top: 20px; padding-bottom: 20px;" >
     <center>
         <form name="Not Confused" action="StudentServlet" style="display:inline;" align="center">
             <input type="hidden"   
