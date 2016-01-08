@@ -55,29 +55,25 @@
 
         <br><div id="percent">0</div>
         
-        <div class="col-lg-12" style="background-color: #34495E;" >
+        <div class="col-lg-12" style="background-color: #FFFFFF; margin-top: 20px; margin-bottom: 20px;" >
     <center>
-        <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
         <form name="Not Confused" action="StudentServlet" style="display:inline;" align="center">
             <input type="hidden"   
                    name="id"   
                    value=<jsp:getProperty name="studentBean" property="roomNum" /> /> 
             <input type='hidden' value="understand" name="formVal">
-            <input type="submit" value="Not Confused" name="Understand"class="btn btn-lg btn-success" style="width: 100%; height: 300px; "/>           
+            <input type="submit" value="Not Confused" name="Understand"class="btn btn-lg btn-success" style="width: 49%; height: 300px; "/>           
         </form>
-         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
         <form name="Confused" action="StudentServlet" style="display:inline;" align="center">
             <input type="hidden"   
                    name="id"   
                    value=<jsp:getProperty name="studentBean" property="roomNum" /> /> 
             <input type='hidden' value="confused" name="formVal">
-            <input type="submit" value="Confused" name="Confused" class="btn btn-lg btn-danger" style="width: 100%; height: 300px; "/>  
+            <input type="submit" value="Confused" name="Confused" class="btn btn-lg btn-danger" style="width: 49%; height: 300px; "/>  
 
 
         </form>
-         </div>
-        </div>
+   
     </center>
         </div>
     <center>
