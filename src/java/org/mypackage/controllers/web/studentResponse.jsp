@@ -51,7 +51,7 @@
         <title>Room <jsp:getProperty name="studentBean" property="roomNum" /> Student</title>
     </head>
     <body>
-        <h1 align="center">Welcome to Room  <jsp:getProperty name="studentBean" property="roomNum" /></h1>
+        <h1 align="center">Welcome to Room  <jsp:getProperty name="studentBean" property="name" /></h1>
 
     <center><br><div id="percent"></div></center>
         
@@ -67,7 +67,7 @@
         <form name="Confused" action="StudentServlet" style="display:inline;" align="center">
             <input type="hidden"   
                    name="id"   
-                   value=<jsp:getProperty name="studentBean" property="name" /> /> 
+                   value=<jsp:getProperty name="studentBean" property="roomNum" /> /> 
             <input type='hidden' value="confused" name="formVal">
             <input type="submit" value="Confused" name="Confused" class="btn btn-lg btn-danger" style="width: 49%; height: 300px; "/>  
 
