@@ -39,7 +39,7 @@
 
                 });
                 $.get("PercentServlet", function (responseText) {
-                    document.getElementById("percent").innerHTML = responseText + "% Understanding";
+                    document.getElementById("percent").innerHTML = "<h3>" + responseText + "% Understanding</h3>";
 
                 });
 
@@ -53,9 +53,9 @@
     <body>
         <h1 align="center">Welcome to Room  <jsp:getProperty name="studentBean" property="roomNum" /></h1>
 
-        <br><div id="percent">0</div>
+    <center><br><div id="percent"></div></center>
         
-        <div class="col-lg-12" style="background-color: #FFFFFF; margin-top: 20px; margin-bottom: 20px;" >
+        <div class="col-lg-12" style="background-color: #FFFFFF; padding-top: 20px; padding-bottom: 20px;" >
     <center>
         <form name="Not Confused" action="StudentServlet" style="display:inline;" align="center">
             <input type="hidden"   
@@ -67,7 +67,7 @@
         <form name="Confused" action="StudentServlet" style="display:inline;" align="center">
             <input type="hidden"   
                    name="id"   
-                   value=<jsp:getProperty name="studentBean" property="roomNum" /> /> 
+                   value=<jsp:getProperty name="studentBean" property="name" /> /> 
             <input type='hidden' value="confused" name="formVal">
             <input type="submit" value="Confused" name="Confused" class="btn btn-lg btn-danger" style="width: 49%; height: 300px; "/>  
 
