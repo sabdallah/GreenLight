@@ -48,7 +48,16 @@ public class panelCreator {
 
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Green Light</title>");
+            out.println("<title>Green Light</title>        "
+                    + "<!-- Loading Bootstrap -->\n"
+                    + "        <link href=\"dist/css/vendor/bootstrap/css/bootstrap.min.css\" rel=\"stylesheet\">\n"
+                    + "\n"
+                    + "        <!-- Loading Flat UI -->\n"
+                    + "        <link href=\"dist/css/flat-ui.css\" rel=\"stylesheet\">\n"
+                    + "        <link href=\"docs/assets/css/demo.css\" rel=\"stylesheet\">\n"
+                    + "\n"
+                    + "        <link rel=\"shortcut icon\" href=\"img/favicon.ico\">"
+            );
             out.println("</head>");
             out.println("<body>");
             //creates button to add class
