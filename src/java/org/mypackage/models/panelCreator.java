@@ -67,6 +67,13 @@ public class panelCreator {
         } else {
             String[] classArray = classes.split(",");
             int index = 0;
+            while(index < classArray.length)
+            {
+                out.print("<tr>\n" +
+                    "<td>"+ ClassDatabaseHandler.getName(Integer.parseInt(classArray[index]))+"</td>\n" +
+                    "<td><a href = \"StudentServlet?id="+ classArray[index]+"\">Join<a></td>\n" +
+                    "<td><a href = \"DeleteClassServlet?id="+ classArray[index]+"\">Leave<a></td>\n" +
+                    "</tr>");
             while (index < classArray.length) {
                 out.print("<tr>\n"
                         + "<td>" + ClassDatabaseHandler.getName(Integer.parseInt(classArray[index])) + "</td>\n"
@@ -96,12 +103,14 @@ public class panelCreator {
         } else {
             String[] classArray = classes.split(",");
             int index = 0;
-            while (index < classArray.length) {
-                out.print("<tr>\n"
-                        + "<td>" + ClassDatabaseHandler.getName(Integer.parseInt(classArray[index])) + "</td>\n"
-                        + "<td><a href = \"TeacherServlet?id=" + classArray[index] + "\">Join<a></td>\n"
-                        + "<td>" + classArray[index] + "</td>\n"
-                        + "</tr>");
+            while(index < classArray.length)
+            {
+                out.print("<tr>\n" +
+                    "<td>"+ ClassDatabaseHandler.getName(Integer.parseInt(classArray[index]))+"</td>\n" +
+                    "<td><a href = \"TeacherServlet?id="+ classArray[index]+"\">Join<a></td>\n" +
+                    "<td>"+ classArray[index]+"</td>\n" +
+                    "<td><a href = \"DeleteClassServlet?id="+ classArray[index]+"\">Delete<a></td>\n" +
+                    "</tr>");
                 index++;
             }
         }

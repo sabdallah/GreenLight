@@ -44,6 +44,10 @@
         <servlet-name>JoinClassServlet</servlet-name>
         <servlet-class>org.mypackage.controllers.JoinClassServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteClassServlet</servlet-name>
+        <servlet-class>org.mypackage.controllers.DeleteClassServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>StudentServlet</servlet-name>
         <url-pattern>/StudentServlet</url-pattern>
@@ -87,6 +91,10 @@
     <servlet-mapping>
         <servlet-name>JoinClassServlet</servlet-name>
         <url-pattern>/JoinClassServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteClassServlet</servlet-name>
+        <url-pattern>/DeleteClassServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

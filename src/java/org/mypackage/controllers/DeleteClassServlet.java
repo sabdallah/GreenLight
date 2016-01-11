@@ -6,33 +6,21 @@
 package org.mypackage.controllers;
 
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import org.mypackage.models.ClassDatabaseHandler;
-import org.mypackage.models.Room;
-import org.mypackage.models.UserDatabaseHandler;
 
 /**
  *
- * @author 1670676
+ * @author 1620032
  */
-@WebServlet(name = "TeacherServlet", urlPatterns = {"/TeacherServlet"})
-public class TeacherServlet extends HttpServlet {
-
-    private final String id = "teacherBean";  // The ID of the Person object
-    private final String destination = "C:\\Users\\1670676\\Dropbox\\NetBeansProjects\\WebApplication1\\rooms\\";
+public class DeleteClassServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
-     *
-     * Makes a new room if a room does not exist, then sends the user to the
-     * teacherResponse page.
      *
      * @param request servlet request
      * @param response servlet response
@@ -41,43 +29,7 @@ public class TeacherServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Room room = null;
-        HttpSession ses = request.getSession(true);
-
-        String user = (String) ses.getAttribute("username");
-        String classes = UserDatabaseHandler.getClasses(user);
-        if (!classes.contains((String) request.getParameter("id"))) {
-            return;
-        }
-
-        try {
-            room = makeNewRoom(request.getParameter("id"));
-            ses.setAttribute("roomNum", request.getParameter("id"));
-        } catch (IOException e) {
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/failIndex.html");
-            dispatcher.forward(request, response);
-            return;
-        }
-
-        ses.setAttribute("ClassNum", room.getRoomNum());
-
-        request.setAttribute(id, room);
-        room.loadData();
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/teacherResponse.jsp");
-        dispatcher.forward(request, response);
-    }
-
-    /**
-     * Creates a new room object if the room that was requested exists.
-     */
-    public Room makeNewRoom(String roomNum) throws IOException {
-        if (ClassDatabaseHandler.checkRoom(Integer.parseInt(roomNum))) {
-            Room room = new Room(Integer.parseInt(roomNum));
-            return room;
-        }
-
-        throw new IOException("Room doesn't exist");
-
+        //TO DO: everything
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

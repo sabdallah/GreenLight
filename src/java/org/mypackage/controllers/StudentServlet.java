@@ -41,8 +41,12 @@ public class StudentServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        Room room = new Room(0);
-        HttpSession ses = request.getSession(true);
+        Room room = null;
+        HttpSession ses = request.getSession(false);
+        if(ses == null){
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.html");
+            dispatcher.forward(request, response);
+        }
 
         String user = (String) ses.getAttribute("username");
         String classes = UserDatabaseHandler.getClasses(user);
