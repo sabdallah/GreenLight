@@ -46,7 +46,7 @@ public class panelCreator {
                 + "            }\n"
                 + "            .animate {\n"
                 + "                position: relative; \n"
-                + "                top: -50px;\n"
+                + "                top: -75px;\n"
                 + "                width: 100%;\n"
                 + "                margin-top: 0px;\n"
                 + "                border-top: 0px;\n"
@@ -123,6 +123,7 @@ public class panelCreator {
         out.println("<tr>\n"
                 + "<td>Class</td>\n"
                 + "<td>Link</td>\n"
+                + "<td></td>\n"
                 + "</tr>");
 
         String classes = UserDatabaseHandler.getClasses(username);
@@ -153,6 +154,7 @@ public class panelCreator {
                 + "<td>Class</td>\n"
                 + "<td>Link</td>\n"
                 + "<td>Class ID</td>\n"
+                + "<td></td>\n"
                 + "</tr>");
 
         String classes = UserDatabaseHandler.getClasses(username);
