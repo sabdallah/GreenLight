@@ -46,17 +46,18 @@ public class panelCreator {
                 + "            }\n"
                 + "            .animate {\n"
                 + "                position: relative; \n"
-                + "                top: -30px;\n"
+                + "                top: -50px;\n"
                 + "                width: 100%;\n"
                 + "                margin-top: 0px;\n"
                 + "                border-top: 0px;\n"
                 + "                padding-top: 0px;\n"
-                + "                height: 300px;\n"
+                + "                height: 150px;\n"
                 + "                -webkit-animation: animate_bg 20s;\n"
                 + "                animation: animate_bg 20s;\n"
                 + "                -webkit-animation-iteration-count: infinite;\n"
                 + "                animation-iteration-count: infinite;\n"
                 + "                text-align: center;\n"
+                + "                float: top;\n"
                 + "            }\n"
                 + "\n"
                 + "            @keyframes animate_bg {\n"
@@ -79,7 +80,7 @@ public class panelCreator {
                 + "<div  class=\"animate\">\n"
                 + "            <br>\n"
                 + "            <br>\n"
-                + "            <center><h3><a href=\"/index.html\">Green Light<a></h3></center>\n"
+                + "            <center><h3>Green Light</h3></center>\n"
                 + "        </div>\n"
                 + "        <br><center>");
         out.println("<h4>Welcome " + username + "</h4>");
@@ -102,7 +103,7 @@ public class panelCreator {
                     + "</br>\n");
         }
         out.println("        <form name=\"LogOut\" action=\"LogoutServlet\" align=\"center\">\n"
-                + "            <input type=\"submit\" value=\"Log out\" name=\"logout\"/>  \n"
+                + "            <input type=\"submit\" value=\"Log out\" name=\"logout\"/ class=\"btn btn-block btn-lg btn-danger\">  \n"
                 + "        </form>");
 
         out.println("        <footer class=\"footer\">\n"
