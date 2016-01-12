@@ -85,7 +85,7 @@ public class RegisterServlet extends HttpServlet {
             return;
         }
         
-        addUser(user, pass1);
+        addUser(user.toLowerCase(), pass1);
         //sendEmail(user);
         dispatcher = getServletContext().getRequestDispatcher("/sendConfirmation.jsp");
         dispatcher.forward(request, response);

@@ -130,7 +130,7 @@ public class panelCreator {
         if (classes == null) {
             out.println("<tr>\n"
                     + "<td>No classes yet!</td>\n"
-                    + "<td>Click above to add your first class!</td>\n"
+                    + "<td>Click below to add your first class!</td>\n"
                     + "</tr>");
         } else {
             String[] classArray = classes.split(",");
