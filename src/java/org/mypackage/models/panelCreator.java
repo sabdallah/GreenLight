@@ -46,7 +46,7 @@ public class panelCreator {
                 + "            }\n"
                 + "            .animate {\n"
                 + "                position: relative; \n"
-                + "                top: -30px;\n"
+                + "                top: -50px;\n"
                 + "                width: 100%;\n"
                 + "                margin-top: 0px;\n"
                 + "                border-top: 0px;\n"
