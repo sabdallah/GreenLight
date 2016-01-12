@@ -115,15 +115,16 @@
                        name="id"   
                        value=<jsp:getProperty name="studentBean" property="roomNum" /> /> 
                 <input type='hidden' value="understand" name="formVal">
-                <input type="submit" value="Not Confused" name="Understand"class="btn btn-lg btn-success" style="width: 49%; height: 300px; "/>           
+                <input type="submit" value="Not Confused" name="Understand"class="btn btn-lg btn-success" style="width: 49%; height: 250px; "/>           
             </form>
             <form name="Confused" action="StudentServlet" style="display:inline;" align="center">
                 <input type="hidden"   
                        name="id"   
                        value=<jsp:getProperty name="studentBean" property="roomNum" /> /> 
                 <input type='hidden' value="confused" name="formVal">
-                <input type="submit" value="Confused" name="Confused" class="btn btn-lg btn-danger" style="width: 49%; height: 300px; "/>
+                <input type="submit" value="Confused" name="Confused" class="btn btn-lg btn-danger" style="width: 49%; height: 250px; "/>
             </form>
+            <br>
             <form name="LogOut" action="LogoutServlet" align="center">
                 <input type="submit" value="Log out" name="logout" class="btn btn-block btn-lg btn-danger"/>  
             </form>
