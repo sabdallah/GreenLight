@@ -87,7 +87,7 @@
 
                 });
                 $.get("PercentServlet", function (responseText) {
-                    document.getElementById("percent").innerHTML = "<h3>" + responseText + "% Understanding</h3>";
+                    document.getElementById("percent").innerHTML = "<h3 style=\"font-size: 5vw;\">" + responseText + "% Understanding</h3>";
 
                 });
 
@@ -104,9 +104,9 @@
             <br>
             <center><h3>Green Light</h3></center>
         </div>
-        <h3 align="center" style="font-size: 10vw;">Welcome to <jsp:getProperty name="studentBean" property="name" />!</h3>
+        <h3 align="center" style="font-size: 5vw;">Welcome to <jsp:getProperty name="studentBean" property="name" />!</h3>
 
-    <center><div id="percent" style="font-size: 10vw;"></div></center>
+    <center><div id="percent" ></div></center>
 
     <div class="col-lg-12" style="background-color: #95a5a6; padding-top: 20px; padding-bottom: 20px;" >
         <center>
