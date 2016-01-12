@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.mypackage.models.UserDatabaseHandler;
+import org.mypackage.models.panelCreator;
 
 /**
  *
@@ -44,7 +45,13 @@ public class DeleteClassServlet extends HttpServlet {
         if(!classes.contains((String)request.getParameter("id")))
             return;
         
+        if(!UserDatabaseHandler.isTeacher(user)){
+            //student
+            UserDatabaseHandler.removeRoom(Integer.parseInt(request.getParameter("id")), user);
+        }
         
+        PrintWriter out = response.getWriter();
+        new panelCreator(out, user, UserDatabaseHandler.isTeacher(user));
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
