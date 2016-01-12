@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
      
         
         if (request.getParameter("username") != null) {
-            username = (String) request.getParameter("username");
+            username = ((String) request.getParameter("username")).toLowerCase();
         }
         else {
             request.setAttribute("error", new StringHolder("Please fill out all of the required information"));
