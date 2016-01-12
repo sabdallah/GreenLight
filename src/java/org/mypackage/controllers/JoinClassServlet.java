@@ -39,78 +39,96 @@ public class JoinClassServlet extends HttpServlet {
         String id1 = "";
         int id2 = 0;
         String password = "";
-        HttpSession ses = request.getSession();
+
+        HttpSession ses = request.getSession(false);
+        if (ses == null) {
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.html");
+            dispatcher.forward(request, response);
+        }
+        String username = (String) ses.getAttribute("username");
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/failJoinClassPage.jsp");
         if (request.getParameter("classID") != null) {
             id1 = (String) request.getParameter("classID");
-            try{ 
-                id2 = Integer.parseInt(id1);}
-            catch(NumberFormatException e){
-                     request.setAttribute("error", new StringHolder("Class ID invalid"));
-            dispatcher.forward(request, response);
-            return;
-                    
-                    }
-            }
-            if (request.getParameter("password") != null) {
-                password = (String) request.getParameter("password");
-            }
-            if (!ClassDatabaseHandler.checkRoom(id2)) {
-                request.setAttribute("error", new StringHolder("There is no class with that ID in our database."));
-                dispatcher.forward(request, response);
-                return;
-            } else if (!ClassDatabaseHandler.checkPassword(id2, password)) {
-                request.setAttribute("error", new StringHolder("Password incorrect."));
+            try {
+                id2 = Integer.parseInt(id1);
+            } catch (NumberFormatException e) {
+                request.setAttribute("error", new StringHolder("Class ID invalid"));
                 dispatcher.forward(request, response);
                 return;
             }
-            String username = (String) ses.getAttribute("username");
-            UserDatabaseHandler.addRoom(id2, username);
+        }else{
+            request.setAttribute("error", new StringHolder("Please fill in all fields"));
+                dispatcher.forward(request, response);
+                return;
+        }
+        
+        //if user already has the class
+        if(UserDatabaseHandler.getClasses(username).contains(id1)){
             PrintWriter out = response.getWriter();
             new panelCreator(out, username, UserDatabaseHandler.isTeacher(username));
+            return;
         }
-
-        // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-        /**
-         * Handles the HTTP <code>GET</code> method.
-         *
-         * @param request servlet request
-         * @param response servlet response
-         * @throws ServletException if a servlet-specific error occurs
-         * @throws IOException if an I/O error occurs
-         */
-        @Override
-        protected void doGet
-        (HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-            processRequest(request, response);
-        }
-
-        /**
-         * Handles the HTTP <code>POST</code> method.
-         *
-         * @param request servlet request
-         * @param response servlet response
-         * @throws ServletException if a servlet-specific error occurs
-         * @throws IOException if an I/O error occurs
-         */
-        @Override
-        protected void doPost
-        (HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-            processRequest(request, response);
-        }
-
-        /**
-         * Returns a short description of the servlet.
-         *
-         * @return a String containing servlet description
-         */
-        @Override
-        public String getServletInfo
         
-            () {
-        return "Short description";
-        }// </editor-fold>
-
+        if (request.getParameter("password") != null) {
+            password = (String) request.getParameter("password");
+        }else{
+            request.setAttribute("error", new StringHolder("Please fill in all fields"));
+                dispatcher.forward(request, response);
+                return;
+        }
+        
+        if (!ClassDatabaseHandler.checkRoom(id2)) {
+            request.setAttribute("error", new StringHolder("There is no class with that ID in our database."));
+            dispatcher.forward(request, response);
+            return;
+        } else if (!ClassDatabaseHandler.checkPassword(id2, password)) {
+            request.setAttribute("error", new StringHolder("Password incorrect."));
+            dispatcher.forward(request, response);
+            return;
+        }
+        
+        UserDatabaseHandler.addRoom(id2, username);
+        PrintWriter out = response.getWriter();
+        new panelCreator(out, username, UserDatabaseHandler.isTeacher(username));
     }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+}
