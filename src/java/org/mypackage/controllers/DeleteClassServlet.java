@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.mypackage.models.ClassDatabaseHandler;
 import org.mypackage.models.UserDatabaseHandler;
 import org.mypackage.models.panelCreator;
 
@@ -52,6 +53,11 @@ public class DeleteClassServlet extends HttpServlet {
         if(!UserDatabaseHandler.isTeacher(user)){
             //student
             UserDatabaseHandler.removeRoom(Integer.parseInt(request.getParameter("id")), user);
+        }else{
+            //teacher
+            ClassDatabaseHandler.deleteClass(Integer.parseInt(request.getParameter("id")), user);
+            UserDatabaseHandler.removeRoom(Integer.parseInt(request.getParameter("id")), user);
+            
         }
         
         PrintWriter out = response.getWriter();

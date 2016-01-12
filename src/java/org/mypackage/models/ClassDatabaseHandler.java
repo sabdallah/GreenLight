@@ -360,5 +360,9 @@ public class ClassDatabaseHandler {
         }
         return result;
     }
+    
+    public static void deleteClass(int id, String email){
+        //TO DO: check if teacher hass class, then delete 
+    }
 
 }
