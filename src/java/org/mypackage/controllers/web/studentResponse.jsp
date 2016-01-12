@@ -104,9 +104,9 @@
             <br>
             <center><h3>Green Light</h3></center>
         </div>
-        <h3 align="center">Welcome to <jsp:getProperty name="studentBean" property="name" />!</h3>
+        <h3 align="center" style="font-size: 4vh;">Welcome to <jsp:getProperty name="studentBean" property="name" />!</h3>
 
-    <center><br><div id="percent"></div></center>
+    <center><div id="percent"style="font-size: 4vh></div></center>
 
     <div class="col-lg-12" style="background-color: #95a5a6; padding-top: 20px; padding-bottom: 20px;" >
         <center>
@@ -122,16 +122,13 @@
                        name="id"   
                        value=<jsp:getProperty name="studentBean" property="roomNum" /> /> 
                 <input type='hidden' value="confused" name="formVal">
-                <input type="submit" value="Confused" name="Confused" class="btn btn-lg btn-danger" style="width: 49%; height: 300px; "/>  
-
-
+                <input type="submit" value="Confused" name="Confused" class="btn btn-lg btn-danger" style="width: 49%; height: 300px; "/>
             </form>
-
         </center>
     </div>
     <center>
         <form name="LogOut" action="LogoutServlet" align="center">
-            <input type="submit" value="Log out" name="logout"/>  
+            <input type="submit" value="Log out" name="logout" class="btn btn-block btn-lg btn-danger"/>  
         </form>
     </center>
     <footer class="footer">
