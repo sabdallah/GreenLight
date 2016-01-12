@@ -117,7 +117,7 @@ public class panelCreator {
     }
 
     private void createTableStudent(PrintWriter out, String username) {
-        out.println("<table class=\"table-striped\" border=\"5\">");
+        out.println("<table class=\"table table-striped\">");
         //labels
         out.println("<tr>\n"
                 + "<td>Class</td>\n"
@@ -146,7 +146,7 @@ public class panelCreator {
     }
 
     private void createTableTeacher(PrintWriter out, String username) {
-        out.println("<table class=\"table-striped\" border=\"5\">");
+        out.println("<table class=\"table table-striped\">");
         //labels
         out.println("<tr>\n"
                 + "<td>Class</td>\n"
