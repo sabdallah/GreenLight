@@ -142,9 +142,13 @@ public class UserDatabaseHandler {
             stmt = conn.createStatement();
             
             String sql;
-            
-            sql = "SELECT classes FROM Root.accounts WHERE CAST(email AS VARCHAR(128)) ='" + email + "'";
-            ResultSet rs = stmt.executeQuery(sql);
+            sql = "SELECT classes FROM Root.accounts WHERE CAST(email AS VARCHAR(128)) =?";
+              PreparedStatement preparedStatement
+                    = conn.prepareStatement(sql);
+
+            preparedStatement.setString(1, email);
+
+            ResultSet rs = preparedStatement.executeQuery();
 
             rs.next();
 
@@ -155,7 +159,7 @@ public class UserDatabaseHandler {
                 String[] array = result.split(",");
                 String newResult = "";
                 for(String x:array){
-                    if(x != ""+id){
+                    if(!x.equals(""+id)){
                         if(newResult.length()>2)
                             newResult = newResult + ",";
                         newResult = newResult + id;
