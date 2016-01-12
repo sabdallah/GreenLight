@@ -162,19 +162,23 @@ public class UserDatabaseHandler {
                     if(!x.equals(""+id)){
                         if(newResult.length()>2)
                             newResult = newResult + ",";
-                        newResult = newResult + id;
+                        newResult = newResult + x;
                     } 
                 }
-                if(newResult.length() != 0)
-                    newResult = "'" + newResult + "'";
-                else
-                    newResult = "NULL";
+                if(newResult.length() == 0)
+                    newResult = null;
                 
                 result = newResult;
             }
             
-            sql = "UPDATE Root.accounts SET classes = " + result +" WHERE CAST(email AS VARCHAR(128)) ='" + email + "'";
-            stmt.execute(sql);
+            sql = "UPDATE Root.accounts SET classes =? WHERE CAST(email AS VARCHAR(128)) =?";
+            preparedStatement
+                    = conn.prepareStatement(sql);
+
+            preparedStatement.setString(1, result);
+            preparedStatement.setString(2, email);
+
+            preparedStatement.executeUpdate();
             
             rs.close();
             stmt.close();

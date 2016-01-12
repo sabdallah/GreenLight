@@ -42,8 +42,12 @@ public class DeleteClassServlet extends HttpServlet {
         
         String user = (String) ses.getAttribute("username");
         String classes = UserDatabaseHandler.getClasses(user);
-        if(!classes.contains((String)request.getParameter("id")))
+        if(!classes.contains((String)request.getParameter("id"))){
+            PrintWriter out = response.getWriter();
+            new panelCreator(out, user, UserDatabaseHandler.isTeacher(user));
             return;
+        }
+        
         
         if(!UserDatabaseHandler.isTeacher(user)){
             //student
