@@ -7,10 +7,13 @@ package org.mypackage.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import org.mypackage.models.UserDatabaseHandler;
 
 /**
  *
@@ -29,7 +32,19 @@ public class DeleteClassServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //TO DO: everything
+        
+        HttpSession ses = request.getSession(false);
+        if(ses == null){
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.html");
+            dispatcher.forward(request, response);
+        }
+        
+        String user = (String) ses.getAttribute("username");
+        String classes = UserDatabaseHandler.getClasses(user);
+        if(!classes.contains((String)request.getParameter("id")))
+            return;
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
