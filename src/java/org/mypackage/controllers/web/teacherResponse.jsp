@@ -75,9 +75,16 @@
             $.get("PercentServlet", function (responseText) {
                 document.getElementById("percent").innerHTML = responseText + "% Understanding";
             });
+            $.get("QuestionServlet", function (responseText) {
+                document.getElementById("question").innerHTML = responseText + "% Understanding";
+            });
         }
         setInterval(refresh, 1000);
-
+        
+        function deleteQuestion(index){
+            $.get("deleteQuestion?index=" + index);
+            refresh();
+        }
     </script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Room <jsp:getProperty name="teacherBean" property="roomNum" /> Teacher</title>
@@ -91,6 +98,7 @@
     <div>
         <h1 align="center">Welcome to Room  <jsp:getProperty name="teacherBean" property="roomNum" /></h1>
         <h1 align="center"><br><div id="percent"></div></h1>
+        <h1 align="center"><br><div id="question"></div></h1>
     </div>
     <footer class="footer">
         <div class="col-lg-12" style="background-color: #2C3E50;" >
