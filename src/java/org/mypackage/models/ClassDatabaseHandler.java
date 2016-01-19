@@ -506,6 +506,66 @@ public class ClassDatabaseHandler {
             }
         }
     }
+    
+    public static String[] getQuestions(int room) {
+        Connection conn = null;
+        String[] results = new String[0];
+        try {
+
+            conn = ((DataSource) new InitialContext().lookup("jdbc/ConfusOMeter")).getConnection();
+            String sql;
+            sql = "SELECT questions FROM Root.Data WHERE room =?";
+            PreparedStatement preparedStatement
+                    = conn.prepareStatement(sql);
+
+            preparedStatement.setInt(1, room);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            rs.next();
+
+            String questions = rs.getString("questions");
+
+            String[] all = questions.split(getCode(room));
+            results = new String[all.length/2];
+            String question = "";
+            for(int i = 0; i < all.length; i++){
+                if(i%2 == 0)
+                {
+                    question = all[i];
+                }
+                else
+                {
+                    String username = all[i];
+                    username = username.substring(0,username.indexOf(" ")) + "@" + username.substring(username.indexOf(" ")+1);
+                    question = question + getCode(room) + username;
+                    results[i/2] =  question;
+                    question = "";
+                }    
+                    
+            }
+
+            rs.close();
+            preparedStatement.close();
+            conn.close();
+        } catch (SQLException se) {
+
+            se.printStackTrace();
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        } finally {
+
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return results;
+    }
 
     static String generateCode(Random rng, String chars, int length) {
         char[] text = new char[length];
