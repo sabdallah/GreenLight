@@ -362,7 +362,45 @@ public class ClassDatabaseHandler {
     }
     
     public static void deleteClass(int id, String email){
-        //TO DO: check if teacher hass class, then delete 
+        String classes = UserDatabaseHandler.getClasses(email);
+        if(!classes.contains(""+id)){
+            return;
+        }
+        Connection conn = null;
+        String result = null;
+        try {
+
+            conn = ((DataSource) new InitialContext().lookup("jdbc/ConfusOMeter")).getConnection();
+
+            
+            String sql;
+            
+            sql = "DELETE FROM Root.data WHERE room =?";
+              PreparedStatement preparedStatement
+                    = conn.prepareStatement(sql);
+
+            preparedStatement.setString(1, ""+id);
+
+            preparedStatement.executeUpdate();
+            
+            preparedStatement.close();
+            conn.close();
+        } catch (SQLException se) {
+
+            se.printStackTrace();
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        System.out.println("Disconnecting!");
     }
 
 }
