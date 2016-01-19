@@ -87,8 +87,8 @@ public class StudentServlet extends HttpServlet {
         } else if ((boolean) ses.getAttribute("understand") == false && understand == true) {
             room.removeGood();
         }
-        if (request.getParameter("question") != null && !request.getParameter("formVal").equals(ses.getAttribute("question"))) {
-            {
+        if (request.getParameter("question") != null && !request.getParameter("question").equals(ses.getAttribute("question"))) {
+            
                 ClassDatabaseHandler.addQuestion((String) request.getParameter("question"), (String) ses.getAttribute("username"), (int) ses.getAttribute("ClassNum"));
                 ses.setAttribute("question", request.getParameter("question"));
             }
@@ -98,7 +98,7 @@ public class StudentServlet extends HttpServlet {
             room.loadData();
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/studentResponse.jsp");
             dispatcher.forward(request, response);
-        }
+        
     }
 
     /**

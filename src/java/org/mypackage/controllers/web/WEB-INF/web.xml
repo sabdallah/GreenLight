@@ -52,6 +52,10 @@
         <servlet-name>QuestionServlet</servlet-name>
         <servlet-class>org.mypackage.controllers.QuestionServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>deleteQuestion</servlet-name>
+        <servlet-class>org.mypackage.controllers.deleteQuestion</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>StudentServlet</servlet-name>
         <url-pattern>/StudentServlet</url-pattern>
@@ -103,6 +107,10 @@
     <servlet-mapping>
         <servlet-name>QuestionServlet</servlet-name>
         <url-pattern>/QuestionServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteQuestion</servlet-name>
+        <url-pattern>/deleteQuestion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

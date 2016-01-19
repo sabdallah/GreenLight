@@ -526,6 +526,10 @@ public class ClassDatabaseHandler {
 
             String questions = rs.getString("questions");
 
+            if(questions == null){
+                results = null;
+            }else{
+            
             String[] all = questions.split(getCode(room));
             results = new String[all.length/2];
             String question = "";
@@ -543,7 +547,7 @@ public class ClassDatabaseHandler {
                     question = "";
                 }    
                     
-            }
+            }}
 
             rs.close();
             preparedStatement.close();

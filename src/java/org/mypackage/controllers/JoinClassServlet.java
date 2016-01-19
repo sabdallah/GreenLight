@@ -63,7 +63,7 @@ public class JoinClassServlet extends HttpServlet {
         }
         
         //if user already has the class
-        if(UserDatabaseHandler.getClasses(username).contains(id1)){
+        if(UserDatabaseHandler.getClasses(username)!= null && UserDatabaseHandler.getClasses(username).contains(id1)){
             PrintWriter out = response.getWriter();
             new panelCreator(out, username, UserDatabaseHandler.isTeacher(username));
             return;

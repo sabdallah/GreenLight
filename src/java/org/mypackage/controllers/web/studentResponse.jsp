@@ -126,6 +126,9 @@
             </form>
             <br>
             <form name="Question" action="StudentServlet" style="display:inline;" align="center">
+                <input type="hidden"   
+                       name="id"   
+                       value=<jsp:getProperty name="studentBean" property="roomNum" /> /> 
                 <label for="question">Question</label>
                 <input type="text" name="question" class="form-control" id="question" placeholder=<jsp:getProperty name="qHolder" property="string" />>
                 <input type="submit" value="q" name="qsubmit" class="btn btn-lg btn-primary">

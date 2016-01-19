@@ -54,7 +54,6 @@ public class QuestionServlet extends HttpServlet {
         HttpSession ses = request.getSession();
         
         QuestionTableCreator q = new QuestionTableCreator(response.getWriter(), (int) ses.getAttribute("ClassNum"));
->>>>>>> origin/master
     }
     
     
