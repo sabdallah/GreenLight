@@ -234,9 +234,9 @@ public class ClassDatabaseHandler {
             sql = "INSERT INTO Root.Data (room,understand,total, name, password, code) VALUES(?,0,0,?,?,?)";
             PreparedStatement preparedStatement
                     = conn.prepareStatement(sql);
-            
+
             String code = generateCode(new Random(), "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890", 5);
-            
+
             preparedStatement.setInt(1, room);
             preparedStatement.setString(2, name);
             preparedStatement.setString(3, password);
@@ -454,12 +454,12 @@ public class ClassDatabaseHandler {
         return result;
     }
 
-    static void addQuestion(String question, String uid, int room) {
+    public static void addQuestion(String question, String uid, int room) {
         Connection conn = null;
         try {
 
             conn = ((DataSource) new InitialContext().lookup("jdbc/ConfusOMeter")).getConnection();
-
+            uid = uid.substring(0, uid.indexOf("@")) + " " + uid.substring(uid.indexOf("@") + 1);
             String sql;
             sql = "SELECT questions FROM Root.Data WHERE room =?";
             PreparedStatement preparedStatement
@@ -506,7 +506,7 @@ public class ClassDatabaseHandler {
             }
         }
     }
-        
+
     static String generateCode(Random rng, String chars, int length) {
         char[] text = new char[length];
         for (int i = 0; i < length; i++) {

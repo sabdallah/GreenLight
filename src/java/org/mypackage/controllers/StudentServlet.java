@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.mypackage.models.ClassDatabaseHandler;
 import org.mypackage.models.Room;
+import org.mypackage.models.StringHolder;
 import org.mypackage.models.UserDatabaseHandler;
 
 /**
@@ -43,18 +44,17 @@ public class StudentServlet extends HttpServlet {
 
         Room room = null;
         HttpSession ses = request.getSession(false);
-        if(ses == null){
+        if (ses == null) {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.html");
             dispatcher.forward(request, response);
         }
 
         String user = (String) ses.getAttribute("username");
         String classes = UserDatabaseHandler.getClasses(user);
-        if(!classes.contains((String)request.getParameter("id"))){
+        if (!classes.contains((String) request.getParameter("id"))) {
             return;
         }
-        
-        
+
         try {
             room = makeNewRoom(request.getParameter("id"));
             ses.setAttribute("roomNum", request.getParameter("id"));
@@ -63,13 +63,17 @@ public class StudentServlet extends HttpServlet {
             dispatcher.forward(request, response);
             return;
         }
-        
+        ses.setAttribute("ClassNum", room.getRoomNum());
         if (ses.getAttribute("understand") == null) {
             ses.setAttribute("understand", true);
             room.addKid();
             room.addGood();
         }
-        
+
+        if (ses.getAttribute("question") == null) {
+            ses.setAttribute("question", "");
+        }
+
         boolean understand = (boolean) ses.getAttribute("understand");
 
         if (request.getParameter("formVal") != null && request.getParameter("formVal").equals("confused")) {
@@ -83,12 +87,18 @@ public class StudentServlet extends HttpServlet {
         } else if ((boolean) ses.getAttribute("understand") == false && understand == true) {
             room.removeGood();
         }
-        ses.setAttribute("ClassNum", room.getRoomNum());
-
-        request.setAttribute(id, room);
-        room.loadData();
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/studentResponse.jsp");
-        dispatcher.forward(request, response);
+        if (request.getParameter("question") != null && !request.getParameter("formVal").equals(ses.getAttribute("question"))) {
+            {
+                ClassDatabaseHandler.addQuestion((String) request.getParameter("question"), (String) ses.getAttribute("username"), (int) ses.getAttribute("ClassNum"));
+                ses.setAttribute("question", request.getParameter("question"));
+            }
+            StringHolder qHolder = new StringHolder("\"" + (String) ses.getAttribute("question") + "\"");
+            request.setAttribute("qHolder", qHolder);
+            request.setAttribute(id, room);
+            room.loadData();
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/studentResponse.jsp");
+            dispatcher.forward(request, response);
+        }
     }
 
     /**
