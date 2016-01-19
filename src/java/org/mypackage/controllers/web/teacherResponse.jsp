@@ -76,7 +76,7 @@
                 document.getElementById("percent").innerHTML = responseText + "% Understanding";
             });
             $.get("QuestionServlet", function (responseText) {
-                document.getElementById("question").innerHTML = responseText + "% Understanding";
+                document.getElementById("question").innerHTML = responseText;
             });
         }
         setInterval(refresh, 1000);
