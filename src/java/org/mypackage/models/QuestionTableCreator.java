@@ -13,7 +13,7 @@ import java.io.PrintWriter;
  */
 public class QuestionTableCreator {
     
-     private void createTable(PrintWriter out, int room) {
+     public QuestionTableCreator(PrintWriter out, int room) {
         out.println("<table class=\"table table-striped\">");
         //labels
         out.println("<tr>\n"

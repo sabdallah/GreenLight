@@ -49,10 +49,6 @@
         <servlet-class>org.mypackage.controllers.DeleteClassServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>deleteQuestion</servlet-name>
-        <servlet-class>org.mypackage.controllers.deleteQuestion</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>QuestionServlet</servlet-name>
         <servlet-class>org.mypackage.controllers.QuestionServlet</servlet-class>
     </servlet>
@@ -105,8 +101,6 @@
         <url-pattern>/DeleteClassServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>deleteQuestion</servlet-name>
-        <url-pattern>/deleteQuestion</url-pattern>
         <servlet-name>QuestionServlet</servlet-name>
         <url-pattern>/QuestionServlet</url-pattern>
     </servlet-mapping>
