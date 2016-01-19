@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.mypackage.models.ClassDatabaseHandler;
+import org.mypackage.models.QuestionTableCreator;
 import org.mypackage.models.Room;
 
 /**
@@ -52,7 +53,7 @@ public class QuestionServlet extends HttpServlet {
 
         HttpSession ses = request.getSession();
         
-        response.getWriter().write("" + Math.round((float)room.getPercent()));
+        QuestionTableCreator q = new QuestionTableCreator(response.getWriter(), (int) ses.getAttribute("ClassNum"));
     }
     
     
