@@ -125,6 +125,11 @@
                 <input type="submit" value="Confused" name="Confused" class="btn btn-lg btn-danger" style="width: 49%; height: 250px; "/>
             </form>
             <br>
+            <form name="Question" action="StudentServlet" style="display:inline;" align="center">
+                <label for="question">Question</label>
+                <input type="text" name="question" class="form-control" id="question" placeholder=<jsp:getProperty name="qHolder" property="string" />>
+                <input type="submit" value="q" name="qsubmit" class="btn btn-lg btn-primary">
+            </form>
             <form name="LogOut" action="LogoutServlet" align="center">
                 <input type="submit" value="Log out" name="logout" class="btn btn-block btn-lg btn-danger"/>  
             </form>
