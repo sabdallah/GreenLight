@@ -4,6 +4,7 @@
 package org.mypackage.models;
 
 import java.sql.*;
+import java.util.Random;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
@@ -82,11 +83,12 @@ public class ClassDatabaseHandler {
             ResultSet rs = preparedStatement.executeQuery();
 
             boolean next = rs.next();
-            
-            if(next)
+
+            if (next) {
                 result = rs.getString("name");
-            else
-                result = "Class no longer exists! Please leave";
+            } else {
+                result = "Class no longer exists! Please leave.";
+            }
 
             rs.close();
             preparedStatement.close();
@@ -228,13 +230,17 @@ public class ClassDatabaseHandler {
 
             conn = ((DataSource) new InitialContext().lookup("jdbc/ConfusOMeter")).getConnection();
             String sql;
-            sql = "INSERT INTO Root.Data (room,understand,total, name, password) VALUES(?,0,0,?,?)";
+
+            sql = "INSERT INTO Root.Data (room,understand,total, name, password, code) VALUES(?,0,0,?,?,?)";
             PreparedStatement preparedStatement
                     = conn.prepareStatement(sql);
-
+            
+            String code = generateCode(new Random(), "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890", 5);
+            
             preparedStatement.setInt(1, room);
             preparedStatement.setString(2, name);
             preparedStatement.setString(3, password);
+            preparedStatement.setString(4, code);
 
             preparedStatement.executeUpdate();
 
@@ -363,10 +369,10 @@ public class ClassDatabaseHandler {
         }
         return result;
     }
-    
-    public static void deleteClass(int id, String email){
+
+    public static void deleteClass(int id, String email) {
         String classes = UserDatabaseHandler.getClasses(email);
-        if(!classes.contains(""+id)){
+        if (!classes.contains("" + id)) {
             return;
         }
         Connection conn = null;
@@ -375,17 +381,16 @@ public class ClassDatabaseHandler {
 
             conn = ((DataSource) new InitialContext().lookup("jdbc/ConfusOMeter")).getConnection();
 
-            
             String sql;
-            
+
             sql = "DELETE FROM Root.data WHERE room =?";
-              PreparedStatement preparedStatement
+            PreparedStatement preparedStatement
                     = conn.prepareStatement(sql);
 
-            preparedStatement.setString(1, ""+id);
+            preparedStatement.setString(1, "" + id);
 
             preparedStatement.executeUpdate();
-            
+
             preparedStatement.close();
             conn.close();
         } catch (SQLException se) {
@@ -404,6 +409,110 @@ public class ClassDatabaseHandler {
             }
         }
         System.out.println("Disconnecting!");
+    }
+
+    static String getCode(int room) {
+        Connection conn = null;
+        String result = "";
+        try {
+
+            conn = ((DataSource) new InitialContext().lookup("jdbc/ConfusOMeter")).getConnection();
+
+            String sql;
+            sql = "SELECT code FROM Root.Data WHERE room =?";
+            PreparedStatement preparedStatement
+                    = conn.prepareStatement(sql);
+
+            preparedStatement.setInt(1, room);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            boolean next = rs.next();
+
+            result = rs.getString("code");
+
+            rs.close();
+            preparedStatement.close();
+            conn.close();
+        } catch (SQLException se) {
+
+            se.printStackTrace();
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        } finally {
+
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+
+        return result;
+    }
+
+    static void addQuestion(String question, String uid, int room) {
+        Connection conn = null;
+        try {
+
+            conn = ((DataSource) new InitialContext().lookup("jdbc/ConfusOMeter")).getConnection();
+
+            String sql;
+            sql = "SELECT questions FROM Root.Data WHERE room =?";
+            PreparedStatement preparedStatement
+                    = conn.prepareStatement(sql);
+
+            preparedStatement.setInt(1, room);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            rs.next();
+
+            String questions = rs.getString("questions");
+
+            if (questions == null || questions.equals("")) {
+                questions = question + getCode(room) + uid + getCode(room);
+
+            } else {
+                questions = questions + question + getCode(room) + uid + getCode(room);
+            }
+
+            sql = "UPDATE Root.data SET questions =? WHERE room =?";
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, questions);
+            preparedStatement.setInt(2, room);
+            preparedStatement.executeUpdate();
+
+            rs.close();
+            preparedStatement.close();
+            conn.close();
+        } catch (SQLException se) {
+
+            se.printStackTrace();
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        } finally {
+
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+    }
+        
+    static String generateCode(Random rng, String chars, int length) {
+        char[] text = new char[length];
+        for (int i = 0; i < length; i++) {
+            text[i] = chars.charAt(rng.nextInt(chars.length()));
+        }
+        return new String(text);
     }
 
 }
