@@ -50,14 +50,17 @@ public class StudentServlet extends HttpServlet {
 
         String user = (String) ses.getAttribute("username");
         String classes = UserDatabaseHandler.getClasses(user);
-        if(!classes.contains((String)request.getParameter("id")))
+        if(!classes.contains((String)request.getParameter("id"))){
             return;
+        }
         
         
         try {
             room = makeNewRoom(request.getParameter("id"));
             ses.setAttribute("roomNum", request.getParameter("id"));
         } catch (IOException e) {
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/NoMoreClass.html");
+            dispatcher.forward(request, response);
             return;
         }
         

@@ -81,9 +81,12 @@ public class ClassDatabaseHandler {
 
             ResultSet rs = preparedStatement.executeQuery();
 
-            rs.next();
-
-            result = rs.getString("name");
+            boolean next = rs.next();
+            
+            if(next)
+                result = rs.getString("name");
+            else
+                result = "Class no longer exists! Please leave";
 
             rs.close();
             preparedStatement.close();
