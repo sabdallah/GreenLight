@@ -98,7 +98,7 @@
     <div>
         <h1 align="center">Welcome to Room  <jsp:getProperty name="teacherBean" property="roomNum" /></h1>
         <h1 align="center"><br><div id="percent"></div></h1>
-        <div class="col-lg-12" style="background-color: #95a5a6; padding-top: 20px; padding-bottom: 20px;">
+        <div class="col-lg-12" style="background-color: white; padding-top: 20px; padding-bottom: 20px;">
         <h6 align="center"><br><div id="question"></div></h6>
         </div>
     </div>
