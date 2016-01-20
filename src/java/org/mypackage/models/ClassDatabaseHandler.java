@@ -134,6 +134,7 @@ public class ClassDatabaseHandler {
 
             int total = rs.getInt("total");
             total += i;
+            if(total < 0) total = 0;
 
             sql = "UPDATE Root.data SET total =? WHERE room =?";
 
@@ -187,6 +188,7 @@ public class ClassDatabaseHandler {
 
             int understand = rs.getInt("understand");
             understand += i;
+            if(understand < 0) understand = 0;
 
             sql = "UPDATE Root.data SET understand =? WHERE room =?";
             preparedStatement = conn.prepareStatement(sql);
@@ -572,6 +574,7 @@ public class ClassDatabaseHandler {
     }
     
     public static void removeQuestion(int index, int classId){
+        index = index *2;
         Connection conn = null;
         Statement stmt = null;
         String result = null;
@@ -604,7 +607,7 @@ public class ClassDatabaseHandler {
                 int current = 0;
                 while(current < array.length){
                     if(current != index){
-                        newResult = array[current] + sep + array[current+1] + sep;
+                        newResult = newResult + array[current] + sep + array[current+1] + sep;
                     }
                     current += 2;
                 }
