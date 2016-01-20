@@ -35,8 +35,8 @@ public class QuestionTableCreator {
                 String uid = questions[index].split(ClassDatabaseHandler.getCode(room))[1];
                 out.print("<tr>\n"
                         + "<td>" + question +"</td>\n"
-                        + "<td>" + "<input id=\"Delete\" type=\"button\" value=\"<img src=\"http://files.softicons.com/download/web-icons/minicons-numbers-icons-by-icojam/png/16x16/red/065.png\">\" onclick=\"deleteQuestion(" + index + ");\" />" + "</td>\n"
-                        + "<td>" + "<input id=\"Delete\" type=\"button\" value=\"<img src=\"http://findicons.com/files/icons/2564/max_mini_icon/16/flag_red.png\">\" onclick=\"deleteQuestion(" + index + ");\" />" + "</td>\n"
+                        + "<td>" + "<input id=\"Delete\" type=\"button\" value=\"Delete\" onclick=\"deleteQuestion(" + index + ");\" />" + "</td>\n"
+                        + "<td>" + "<input id=\"Delete\" type=\"button\" value=\"Report\" onclick=\"deleteQuestion(" + index + ");\" />" + "</td>\n"
                         + "</tr>");
                 index++;
             }
