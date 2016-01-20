@@ -104,47 +104,48 @@
             <br>
             <center><h3>Green Light</h3></center>
         </div>
-        <h3 align="center" style="font-size: 5vw;">Welcome to <jsp:getProperty name="studentBean" property="name" />!</h3>
+        <div>
+            <h3 align="center" style="font-size: 5vw;">Welcome to <jsp:getProperty name="studentBean" property="name" />!</h3>
 
-    <center><div id="percent" ></div></center>
-
-    <div class="col-lg-12" style="background-color: #95a5a6; padding-top: 20px; padding-bottom: 20px;" >
-        <center>
-            <form name="Not Confused" action="StudentServlet" style="display:inline;" align="center">
-                <input type="hidden"   
-                       name="id"   
-                       value=<jsp:getProperty name="studentBean" property="roomNum" /> /> 
-                <input type='hidden' value="understand" name="formVal">
-                <input type="submit" value="Not Confused" name="Understand"class="btn btn-lg btn-success" style="width: 49%; height: 250px; "/>           
-            </form>
-            <form name="Confused" action="StudentServlet" style="display:inline;" align="center">
-                <input type="hidden"   
-                       name="id"   
-                       value=<jsp:getProperty name="studentBean" property="roomNum" /> /> 
-                <input type='hidden' value="confused" name="formVal">
-                <input type="submit" value="Confused" name="Confused" class="btn btn-lg btn-danger" style="width: 49%; height: 250px; "/>
-            </form>
-            <br>
-            <form name="Question" action="StudentServlet" style="display:inline;" align="center">
-                <input type="hidden"   
-                       name="id"   
-                       value=<jsp:getProperty name="studentBean" property="roomNum" /> /> 
-                <label for="question">Question</label>
-                <input type="text" name="question" class="form-control" id="question" placeholder=<jsp:getProperty name="qHolder" property="string" />>
-                <input type="submit" value="q" name="qsubmit" class="btn btn-lg btn-primary">
-            </form>
-            <form name="LogOut" action="LogoutServlet" align="center">
-                <input type="submit" value="Log out" name="logout" class="btn btn-block btn-lg btn-danger"/>  
-            </form>
-        </center>
-    </div>
-    <footer class="footer">
-        <div class="col-lg-12" style="background-color: #2C3E50;" >
-            <div class="row">
-                <span  style="color: white;"><p><small><i>Created by Sam Abdallah and Lucas Sacherer</i></small></p></span> 
-            </div>
+            <center><div id="percent" ></div></center>
         </div>
-    </footer>
-</body>
+        <div class="col-lg-12" style="background-color: #95a5a6; padding-top: 20px; padding-bottom: 20px;" >
+            <center>
+                <form name="Not Confused" action="StudentServlet" style="display:inline;" align="center">
+                    <input type="hidden"   
+                           name="id"   
+                           value=<jsp:getProperty name="studentBean" property="roomNum" /> /> 
+                    <input type='hidden' value="understand" name="formVal">
+                    <input type="submit" value="Not Confused" name="Understand"class="btn btn-lg btn-success" style="width: 49%; height: 250px; "/>           
+                </form>
+                <form name="Confused" action="StudentServlet" style="display:inline;" align="center">
+                    <input type="hidden"   
+                           name="id"   
+                           value=<jsp:getProperty name="studentBean" property="roomNum" /> /> 
+                    <input type='hidden' value="confused" name="formVal">
+                    <input type="submit" value="Confused" name="Confused" class="btn btn-lg btn-danger" style="width: 49%; height: 250px; "/>
+                </form>
+                <br>
+                <form name="Question" action="StudentServlet" style="display:inline;" align="center">
+                    <input type="hidden"   
+                           name="id"   
+                           value=<jsp:getProperty name="studentBean" property="roomNum" /> /> 
+                    <label for="question">Question</label>
+                    <input type="text" name="question" class="form-control" id="question" placeholder=<jsp:getProperty name="qHolder" property="string" />>
+                    <input type="submit" value="Submit" name="qsubmit" class="btn btn-lg btn-primary">
+                </form>
+                <form name="LogOut" action="LogoutServlet" align="center">
+                    <input type="submit" value="Log out" name="logout" class="btn btn-block btn-lg btn-danger"/>  
+                </form>
+            </center>
+        </div>
+        <footer class="footer">
+            <div class="col-lg-12" style="background-color: #2C3E50;" >
+                <div class="row">
+                    <span  style="color: white;"><p><small><i>Created by Sam Abdallah and Lucas Sacherer</i></small></p></span> 
+                </div>
+            </div>
+        </footer>
+    </body>
 
 </html>
