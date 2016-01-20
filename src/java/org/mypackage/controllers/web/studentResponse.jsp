@@ -106,7 +106,6 @@
         </div>
         <div>
             <h3 align="center" style="font-size: 5vw;">Welcome to <jsp:getProperty name="studentBean" property="name" />!</h3>
-
             <center><div id="percent" ></div></center>
         </div>
         <div class="col-lg-12" style="background-color: #95a5a6; padding-top: 20px; padding-bottom: 20px;" >
@@ -137,6 +136,8 @@
                 <form name="LogOut" action="LogoutServlet" align="center">
                     <input type="submit" value="Log out" name="logout" class="btn btn-block btn-lg btn-danger"/>  
                 </form>
+                    <br>
+                    <br>
             </center>
         </div>
         <footer class="footer">
