@@ -53,7 +53,7 @@ public class deleteQuestion extends HttpServlet {
             dispatcher.forward(request, response);
         }
         
-        ClassDatabaseHandler.removeQuestion(Integer.parseInt((String)request.getParameter("index")),Integer.parseInt((String)ses.getAttribute("ClassNum")));
+        ClassDatabaseHandler.removeQuestion(Integer.parseInt((String)request.getParameter("index")),(Integer)ses.getAttribute("ClassNum"));
     }
 
     /**

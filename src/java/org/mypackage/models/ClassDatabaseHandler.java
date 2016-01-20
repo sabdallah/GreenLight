@@ -584,7 +584,7 @@ public class ClassDatabaseHandler {
             stmt = conn.createStatement();
             
             String sql;
-            sql = "SELECT questions FROM Root.data WHERE  class=?";
+            sql = "SELECT questions FROM Root.data WHERE  room=?";
               PreparedStatement preparedStatement
                     = conn.prepareStatement(sql);
 
@@ -594,7 +594,7 @@ public class ClassDatabaseHandler {
 
             rs.next();
 
-            result = rs.getString("CLASSES");
+            result = rs.getString("questions");
             if(result == null)
                 result = "NULL";
             else{
@@ -614,7 +614,7 @@ public class ClassDatabaseHandler {
                 result = newResult;
             }
             
-            sql = "UPDATE Root.data SET questions =? WHERE class =?";
+            sql = "UPDATE Root.data SET questions =? WHERE room =?";
             preparedStatement
                     = conn.prepareStatement(sql);
 
