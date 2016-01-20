@@ -7,11 +7,13 @@ package org.mypackage.controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.mypackage.models.ClassDatabaseHandler;
 
 /**
  *
@@ -45,7 +47,13 @@ public class deleteQuestion extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("Index = " + request.getParameter("index"));
+        HttpSession ses = request.getSession(false);
+        if(ses == null){
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.html");
+            dispatcher.forward(request, response);
+        }
+        
+        ClassDatabaseHandler.removeQuestion(Integer.parseInt((String)request.getParameter("index")),Integer.parseInt((String)ses.getAttribute("ClassNum")));
     }
 
     /**

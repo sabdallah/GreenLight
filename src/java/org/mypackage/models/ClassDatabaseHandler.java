@@ -570,6 +570,86 @@ public class ClassDatabaseHandler {
         }
         return results;
     }
+    
+    public static void removeQuestion(int index, int classId){
+        Connection conn = null;
+        Statement stmt = null;
+        String result = null;
+        try {
+
+            System.out.println("Connecting to database...");
+            conn = ((DataSource) new InitialContext().lookup("jdbc/ConfusOMeter")).getConnection();
+
+            System.out.println("Creating statement... isVerified");
+            stmt = conn.createStatement();
+            
+            String sql;
+            sql = "SELECT questions FROM Root.data WHERE  class=?";
+              PreparedStatement preparedStatement
+                    = conn.prepareStatement(sql);
+
+            preparedStatement.setString(1, ""+classId);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            rs.next();
+
+            result = rs.getString("CLASSES");
+            if(result == null)
+                result = "NULL";
+            else{
+                String[] array = result.split(getCode(classId));
+                String newResult = "";
+                String sep = getCode(classId);
+                int current = 0;
+                while(current < array.length){
+                    if(current != index){
+                        newResult = array[index] + sep + array[index+1] + sep;
+                    }
+                    current += 2;
+                }
+                if(newResult.length()==0){
+                    newResult = "NULL";
+                }
+                result = newResult;
+            }
+            
+            sql = "UPDATE Root.data SET questions =? WHERE class =?";
+            preparedStatement
+                    = conn.prepareStatement(sql);
+
+            preparedStatement.setString(1, result);
+            preparedStatement.setString(2, "" + classId);
+
+            preparedStatement.executeUpdate();
+            
+            rs.close();
+            stmt.close();
+            conn.close();
+        } catch (SQLException se) {
+
+            se.printStackTrace();
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        } finally {
+
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException se2) {
+            }
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        System.out.println("Disconnecting!");
+    }
 
     static String generateCode(Random rng, String chars, int length) {
         char[] text = new char[length];
