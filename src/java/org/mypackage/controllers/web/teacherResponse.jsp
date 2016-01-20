@@ -80,8 +80,8 @@
             });
         }
         setInterval(refresh, 1000);
-        
-        function deleteQuestion(index){
+
+        function deleteQuestion(index) {
             $.get("deleteQuestion?index=" + index);
             refresh();
         }
@@ -98,9 +98,9 @@
     <div>
         <h1 align="center">Welcome to Room  <jsp:getProperty name="teacherBean" property="roomNum" /></h1>
         <h1 align="center"><br><div id="percent"></div></h1>
-        <div class="col-lg-12" style="background-color: white; padding-top: 20px; padding-bottom: 20px;">
+    </div>
+    <div class="col-lg-12" style="background-color: white; padding-top: 20px; padding-bottom: 20px;">
         <h6 align="center"><br><div id="question"></div></h6>
-        </div>
     </div>
     <footer class="footer">
         <div class="col-lg-12" style="background-color: #2C3E50;" >
