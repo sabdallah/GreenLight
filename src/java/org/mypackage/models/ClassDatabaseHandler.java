@@ -596,7 +596,7 @@ public class ClassDatabaseHandler {
 
             result = rs.getString("questions");
             if(result == null)
-                result = "NULL";
+                result = null;
             else{
                 String[] array = result.split(getCode(classId));
                 String newResult = "";
@@ -604,12 +604,12 @@ public class ClassDatabaseHandler {
                 int current = 0;
                 while(current < array.length){
                     if(current != index){
-                        newResult = array[index] + sep + array[index+1] + sep;
+                        newResult = array[current] + sep + array[current+1] + sep;
                     }
                     current += 2;
                 }
                 if(newResult.length()==0){
-                    newResult = "NULL";
+                    newResult = null;
                 }
                 result = newResult;
             }
