@@ -133,11 +133,14 @@
                     <input type="text" name="question" class="form-control" id="question" placeholder=<jsp:getProperty name="qHolder" property="string" />>
                     <input type="submit" value="Submit" name="qsubmit" class="btn btn-lg btn-primary">
                 </form>
+                <form name="Leave" action="LeaveClassServlet" align="center">
+                    <input type="submit" value="Leave" name="leave" class="btn btn-block btn-lg btn-danger"/>  
+                </form>
                 <form name="LogOut" action="LogoutServlet" align="center">
                     <input type="submit" value="Log out" name="logout" class="btn btn-block btn-lg btn-danger"/>  
                 </form>
-                    <br>
-                    <br>
+                <br>
+                <br>
             </center>
         </div>
         <footer class="footer">

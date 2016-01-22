@@ -101,6 +101,11 @@
     </div>
     <div class="col-lg-12" style="background-color: white; padding-top: 20px; padding-bottom: 20px;">
         <h6 align="center"><br><div id="question"></div></h6>
+        <form name="Leave" action="LeaveClassServlet" align="center">
+            <input type="submit" value="Leave" name="leave" class="btn btn-block btn-lg btn-danger"/>  
+        </form>
+        <br>
+        <br>
     </div>
     <footer class="footer">
         <div class="col-lg-12" style="background-color: #2C3E50;" >
