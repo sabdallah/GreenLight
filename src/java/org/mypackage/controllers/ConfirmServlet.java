@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * A servlet that recieves the confirmation code from the confirmation email in order to verify the user's email.
+ * If the code is correct, it then verifies the user's account.
  */
 package org.mypackage.controllers;
 
@@ -17,13 +16,13 @@ import org.mypackage.models.UserDatabaseHandler;
 
 /**
  *
- * @author 1670676
+ * @author Sam Abdallah
  */
 public class ConfirmServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * methods. It gets the obfuscated email in code form, decrypts it, and then verifies that email in the database.
      *
      * @param request servlet request
      * @param response servlet response

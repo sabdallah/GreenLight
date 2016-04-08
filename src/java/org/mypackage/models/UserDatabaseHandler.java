@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * A class that carries out all database related operations for user accounts.
  */
 package org.mypackage.models;
 

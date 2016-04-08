@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * A class that dynamically creates the user panel using a PrintWriter.
  */
 package org.mypackage.models;
 
@@ -9,7 +7,7 @@ import java.io.PrintWriter;
 
 /**
  *
- * @author 1620032
+ * @author Lucas Sacherer & Sam Abdallah
  */
 public class panelCreator {
 

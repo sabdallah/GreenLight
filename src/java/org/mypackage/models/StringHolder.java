@@ -1,21 +1,25 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * A kluge class created so that we can easily pass strings (Like errors and other information) into the JSP pages in Bean form.
  */
 package org.mypackage.models;
 
 /**
  *
- * @author sam
+ * @author Sam Abdallah
  */
 public class StringHolder {
     String s1;
+    /**
+     * Constructs the StringHolder from a given string.
+     */
     public StringHolder(String s){
         s1 = s;
     
     }
     
+    /**
+     * Returns the string.
+     */
     public String getString(){
         return s1;
     }

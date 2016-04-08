@@ -5,10 +5,9 @@ import java.io.Serializable;
 /**
  * A class that handles all of the numbers to be passed to and from the
  * database. An intermediate between the classroom JSP pages and the
- * ClassDatabaseHandler.
+ * ClassDatabaseHandler. This class is way less necessary now that we've switched from text files to databases and may soon be deprecated soon.
  *
  * @author Sam Abdallah
- * @version .8
  */
 public final class Room implements Serializable {
 

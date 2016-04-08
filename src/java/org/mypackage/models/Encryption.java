@@ -1,14 +1,13 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Converts between confirmation codes and emails. 
+ * Confirmation codes are email addresses obfuscated into a string consisting of the numeric char value of each character in the email.
  */
 package org.mypackage.models;
 import java.lang.*;
 
 /**
  *
- * @author 1670676
+ * @author Sam Abdallah
  */
 public class Encryption {
     
