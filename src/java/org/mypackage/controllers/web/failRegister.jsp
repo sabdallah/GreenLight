@@ -24,6 +24,11 @@
           <script src="dist/js/vendor/respond.min.js"></script>
         <![endif]-->
 
+        <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
         <style>
             html {
                 position: relative;
@@ -74,8 +79,6 @@
         </style>
 
         <title>Welcome Page | Green Light | Welcome Page</title>  
-        <meta charset="UTF-8">  
-        <meta name="viewport" content="width=device-width">  
     </head>  
     <body>   
         <div  class="animate">
