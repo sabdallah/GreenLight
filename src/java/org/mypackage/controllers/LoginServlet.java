@@ -44,7 +44,7 @@ public class LoginServlet extends HttpServlet {
         InternetAddress i = null;
      
         
-        if (request.getParameter("username") != null) {
+        if (request.getParameter("username") != null && !request.getParameter("username").equals("")) {
             username = ((String) request.getParameter("username")).toLowerCase();
         }
         else {
@@ -54,7 +54,7 @@ public class LoginServlet extends HttpServlet {
         }
         try {
                 i = new InternetAddress(username);
-            } catch (AddressException ex) {
+        } catch (AddressException ex) {
                 //This will never happen
                 System.out.println("An error has occured");
         }
