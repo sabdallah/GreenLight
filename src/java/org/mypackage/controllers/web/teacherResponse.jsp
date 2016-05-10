@@ -8,7 +8,10 @@
 <!DOCTYPE html>
 <html>
     <jsp:useBean id="teacherBean" scope="request" class="org.mypackage.models.Room" />
-
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <head>
         <style>
             html {
@@ -85,8 +88,12 @@
             $.get("deleteQuestion?index=" + index);
             refresh();
         }
+        
+        function report(index) {
+            $.get("deleteQuestion?index=" + index);
+            refresh();
+        }
     </script>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Room <jsp:getProperty name="teacherBean" property="roomNum" /> Teacher</title>
 </head>
 <body>

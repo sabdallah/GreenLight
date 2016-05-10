@@ -34,7 +34,7 @@ public class QuestionTableCreator {
                 out.print("<tr>\n"
                         + "<td>" + question +"</td>\n"
                         + "<td>" + "<input id=\"Delete\" type=\"button\" value=\"Delete\" onclick=\"deleteQuestion(" + index + ");\" />" + "</td>\n"
-                        + "<td>" + "<input id=\"Delete\" type=\"button\" value=\"Report\" onclick=\"deleteQuestion(" + index + ");\" />" + "</td>\n"
+                        + "<td>" + "<input id=\"Report\" type=\"button\" value=\"Report\" onclick=\"report(" + index + ");\" />" + "</td>\n"
                         + "</tr>");
                 index++;
             }
