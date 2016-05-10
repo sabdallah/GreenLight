@@ -12,7 +12,7 @@ import java.io.PrintWriter;
 public class panelCreator {
 
     public panelCreator(PrintWriter out, String username, boolean teacher) {
-        out.println("<html>");
+        out.println("<html><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0\">");
         out.println("<head>");
         out.println("<title>Green Light</title>        "
                 + "<!-- Loading Bootstrap -->\n"

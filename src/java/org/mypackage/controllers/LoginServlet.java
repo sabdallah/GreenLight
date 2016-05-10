@@ -7,6 +7,8 @@ package org.mypackage.controllers;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Iterator;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -39,9 +41,10 @@ public class LoginServlet extends HttpServlet {
         HttpSession ses = request.getSession();
         response.setContentType("text/html");
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/failLogin.jsp");
+        InternetAddress i = null;
      
         
-        if (request.getParameter("username") != null) {
+        if (request.getParameter("username") != null && !request.getParameter("username").equals("")) {
             username = ((String) request.getParameter("username")).toLowerCase();
         }
         else {
@@ -49,11 +52,24 @@ public class LoginServlet extends HttpServlet {
             dispatcher.forward(request, response);
             return;
         }
+        try {
+                i = new InternetAddress(username);
+        } catch (AddressException ex) {
+                //This will never happen
+                System.out.println("An error has occured");
+        }
         if (request.getParameter("password") != null) {
             password = (String) request.getParameter("password");
         }
         else {
             request.setAttribute("error", new StringHolder("Please fill out all of the required information"));
+            dispatcher.forward(request, response);
+            return;
+        }
+        try {
+            i.validate();
+        } catch (AddressException e) {
+            request.setAttribute("error", new StringHolder("Email must be valid"));
             dispatcher.forward(request, response);
             return;
         }
