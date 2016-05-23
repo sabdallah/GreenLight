@@ -475,19 +475,26 @@ public class ClassDatabaseHandler {
 
             String questions = rs.getString("questions");
 
+            while(question != null && question.contains(getCode(room))){
+                question = question.substring(0,question.indexOf(getCode(room))) + question.substring(question.indexOf(getCode(room))+5);
+            
+            }
+            if(question != null){
             if (questions == null || questions.equals("")) {
                 questions = question + getCode(room) + uid + getCode(room);
 
-            } else {
+            } 
+            else {
                 questions = questions + question + getCode(room) + uid + getCode(room);
             }
 
             sql = "UPDATE Root.data SET questions =? WHERE room =?";
+            
             preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, questions);
             preparedStatement.setInt(2, room);
             preparedStatement.executeUpdate();
-
+            }
             rs.close();
             preparedStatement.close();
             conn.close();
