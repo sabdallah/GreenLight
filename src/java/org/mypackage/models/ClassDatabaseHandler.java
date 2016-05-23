@@ -479,7 +479,7 @@ public class ClassDatabaseHandler {
                 question = question.substring(0,question.indexOf(getCode(room))) + question.substring(question.indexOf(getCode(room))+5);
             
             }
-            if(question != null){
+            if(question != null && !question.equals("")){
             if (questions == null || questions.equals("")) {
                 questions = question + getCode(room) + uid + getCode(room);
 
