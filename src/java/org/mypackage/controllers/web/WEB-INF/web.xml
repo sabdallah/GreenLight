@@ -60,6 +60,10 @@
         <servlet-name>LeaveClassServlet</servlet-name>
         <servlet-class>org.mypackage.controllers.LeaveClassServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>reportQuestion</servlet-name>
+        <servlet-class>org.mypackage.controllers.reportQuestion</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>StudentServlet</servlet-name>
         <url-pattern>/StudentServlet</url-pattern>
@@ -119,6 +123,10 @@
     <servlet-mapping>
         <servlet-name>LeaveClassServlet</servlet-name>
         <url-pattern>/LeaveClassServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>reportQuestion</servlet-name>
+        <url-pattern>/reportQuestion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
