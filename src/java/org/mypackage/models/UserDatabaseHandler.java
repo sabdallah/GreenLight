@@ -306,7 +306,7 @@ public class UserDatabaseHandler {
                     = conn.prepareStatement(sql);
 
             preparedStatement.setString(1, username);
-            preparedStatement.setString(2, password);
+            preparedStatement.setString(2, "" + password.hashCode());
 
             preparedStatement.executeUpdate();
             preparedStatement.close();
@@ -406,7 +406,7 @@ public class UserDatabaseHandler {
                 while(!result && rs.next())
                 {System.out.println(rs.getString("email") + ";" + username);
                 if (rs.getString("email").equals(username)) {
-                    if(rs.getString("password").equals(password))
+                    if(rs.getString("password").equals("" + password.hashCode()))
                         result = true;
                     else
                         break;
